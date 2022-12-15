@@ -1,3 +1,28 @@
 ::::往往是监听自身
 create database k8s_abais charset utf8mb4;
 配置文件热加载,但是如果使用配置的操作没有"重启"是无效的
+map slice chan(nil的map不能直接使用)
+(new一般结构体指针)
+for range 表达式和return返回值都是先求值
+
+
+token无状态管理的认证模式更好,服务端不用存储数据了
+jwt json web token标准,特别适用于分布式站点的单点登录
+头部header 负载payload 签名signature
+三部分经过base64编码得到token
+非安全
+用.串联
+头部记录加密算法和token类型(jwt)
+负载可以自定义字段,官方提供的字段iss发行人 exp过期时间 sub主题 aud受众 nbf生效时间 iat签发时间 jti编号时间
+签名是针对前面两部分签名,防篡改
+
+jwt-go
+authorization bear token Token(其实也是header,可以手动写hearder Token: Bear xxx
+判断用户是否是登录状态 1.session中能否拿到该用户session 2.请求头中是否有token,token认证
+jwt搭配refresh token能够针对token被盗取的问题(需要前端的处理)
+jwt属于access token,过期就失效了,一般accesstoken过期时间短语refresh token,当access token过期是,refresh token会获取新的access token,当refresh token也过期那么就要重新登录
+
+基于token实现同一时间只能登陆同一设备
+时间维度上看,同一时间只有一个登录(两个浏览器也行)
+user_id<->token对应,存储在redis中
+请求带的token先判断是否有效,在通过对应该系拿到redis中的token对比(token服务器生成)

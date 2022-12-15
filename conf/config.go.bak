@@ -17,7 +17,7 @@ const (
 
 	// Pod的日志 tail 显示
 	PodLogTailLine = 2000
-	LogDebug       = false // 是否打印debug日志
+	LogDebug       = false // 是否打印mysql的debug日志
 
 	//db配置
 	DbType       = "mysql"

@@ -1,7 +1,8 @@
-package common
+package config
 
 import (
 	"fmt"
+
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/viper"
 )
@@ -16,23 +17,33 @@ type AppConfig struct {
 	AdminPassword string `mapstructure:"AdminPwd"`
 
 	PodLogTailLine int  `mapstructure:"PodLogTailLine"`
-	LogDebug       bool `mapstructure:"LogDebug"`
+	LogMode        bool `mapstructure:"LogMode"`
 
-	MaxIdleConns int    `mapstructure:"MaxIdleConns"`
-	MaxOpenConns int    `mapstructure:"MaxOpenConns"`
-	MaxLifeTime  int    `mapstructure:"MaxLifeTime"`
-	UploadPath   string `mapstructure:"UploadPath"`
+	UploadPath string `mapstructure:"UploadPath"`
 
-	*DBConf `mapstructure:"DB"`
+	*DBConf    `mapstructure:"DB"`
+	*LogConfig `mapstructure:"log"`
 }
 
 type DBConf struct {
-	DBType     string `mapstructure:"DBType"`
-	DBHost     string `mapstructure:"DbHost"`
-	DBPort     int    `mapstructure:"DbPort"`
-	DBName     string `mapstructure:"DbName"`
-	DBUser     string `mapstructure:"DbUser"`
-	DBPassword string `mapstructure:"DbPwd"`
+	DBType       string `mapstructure:"DbType"`
+	DBHost       string `mapstructure:"DbHost"`
+	DBPort       int    `mapstructure:"DbPort"`
+	DBName       string `mapstructure:"DbName"`
+	DBUser       string `mapstructure:"DbUser"`
+	DBPassword   string `mapstructure:"DbPwd"`
+	MaxIdleConns int    `mapstructure:"MaxIdleConns"`
+	MaxOpenConns int    `mapstructure:"MaxOpenConns"`
+	MaxLifeTime  int    `mapstructure:"MaxLifeTime"`
+}
+
+type LogConfig struct {
+	Level     string `mapstructure:"level"`
+	Filename  string `mapstructure:"file_name"`
+	MaxSize   int    `mapstructure:"max_size"`
+	MaxAge    int    `mapstructure:"max_age"`
+	MaxBackup int    `mapstructure:"max_backup"`
+	Compress  bool   `mapstructure:"compress"`
 }
 
 func ConfigRead(configFile string) error {
