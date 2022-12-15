@@ -1,0 +1,3 @@
+::::往往是监听自身
+create database k8s_abais charset utf8mb4;
+配置文件热加载,但是如果使用配置的操作没有"重启"是无效的
