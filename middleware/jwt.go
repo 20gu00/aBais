@@ -1,12 +1,13 @@
 package middleware
 
 import (
+	"github.com/20gu00/aBais/common/jwt-token"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
 
-// JWTAuth 中间件，检查token
+// JWTAuth
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 对登录接口放行
@@ -27,7 +28,7 @@ func JWTAuth() gin.HandlerFunc {
 			}
 
 			// parseToken 解析token包含的信息
-			claims, err := utils.JWTToken.ParseToken(token)
+			claims, err := jwt.JWTToken.ParseToken(token)
 			if err != nil {
 				//token延期错误
 				if err.Error() == "TokenExpired" {

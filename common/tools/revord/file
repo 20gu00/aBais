@@ -26,3 +26,15 @@ jwt属于access token,过期就失效了,一般accesstoken过期时间短语refr
 时间维度上看,同一时间只有一个登录(两个浏览器也行)
 user_id<->token对应,存储在redis中
 请求带的token先判断是否有效,在通过对应该系拿到redis中的token对比(token服务器生成)
+
+c.Next()之前的操作是在Handler执行之前就执行；c.Next()之后的操作是在Handler执行之后再执行；
+之前的操作一般用来做验证处理，访问是否允许之类的。之后的操作一般是用来做总结处理，比如格式化输出、响应结束时间，响应时长计算之类的。
+
+GET("/api/k8s/allres", AllRes.GetAllNum)  Handler
+.或者r.Get()重复
+
+Cross-Origin Resource Sharing
+浏览器的访问 跨域
+
+访问前端服务所处的服务器
+CORS是一种机制，该机制使用附加的HTTP header来告诉浏览器，准许运行在一个源上的Web应用访问位于另一不同源选定的资源。 当一个Web应用发起一个与自身所在源（域，协议和端口）不同的HTTP请求时，它发起的即跨源HTTP请求。
