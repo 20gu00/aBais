@@ -14,7 +14,8 @@ const (
 	CodeInvalidToken                             // 2006
 	CodeTwoDevice                                // 2007
 
-	CodeGetK8sClientErr //2008
+	CodeGetK8sClientErr // 2008
+	CodeGetPodListErr   // 2009
 )
 
 var codeMsgMap = map[respCode]string{
@@ -27,6 +28,7 @@ var codeMsgMap = map[respCode]string{
 	CodeNeedLogin:         "需要登录",
 	CodeInvalidToken:      "无效的token",
 	CodeGetK8sClientErr:   "获取操作k8s的client失败",
+	CodeGetPodListErr:     "获取pod列表失败",
 }
 
 // 基本的返回描述msg

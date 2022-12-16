@@ -2,10 +2,10 @@ package pod
 
 import (
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
-	"net/http"
-
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/pod"
+	"github.com/20gu00/aBais/service/pod"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -28,18 +28,12 @@ func GetPods(ctx *gin.Context) {
 		return
 	}
 	// 获取pods
-	data, err := service.Pod.GetPods(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := pod.Pod.GetPods(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg":  err.Error(),
-			"data": nil,
-		})
+		response.RespInternalErr(ctx, response.CodeGetPodListErr)
 		return
 	}
 
 	// 3.resp
-	ctx.JSON(http.StatusOK, gin.H{
-		"msg":  "获取Pod列表成功",
-		"data": data,
-	})
+	response.RespOK(ctx, "获取Pod列表成功", data)
 }

@@ -48,10 +48,15 @@ func RespMsg(c *gin.Context, code respCode, msg interface{}) {
 	})
 }
 
-func RespOK(c *gin.Context, data interface{}) {
-	c.JSON(http.StatusOK, &Resp{
-		Code: CodeSuccess,
-		Msg:  CodeSuccess.Msg(),
-		Data: data,
+func RespOK(c *gin.Context, msg string, data interface{}) {
+	c.JSON(http.StatusOK, gin.H{
+		"code": CodeSuccess,
+		"msg":  msg,
+		"data": data,
 	})
+	//c.JSON(http.StatusOK, &Resp{
+	//	Code: CodeSuccess,
+	//	Msg:  CodeSuccess.Msg(),
+	//	Data: data,
+	//})
 }

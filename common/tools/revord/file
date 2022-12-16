@@ -51,3 +51,11 @@ token可以不存储在mysql中
 gorm:"column: icon_url"`  针对IconUrl这种
 
 一般get请求为form格式，其他请求为json格式(需要结构体的话要定义tag json)
+
+sort包主要针对[]int、[]float64、[]string、以及其他自定义切片的排序。
+sort 包 在内部实现了四种基本的排序算法：插入排序（insertionSort）、归并排序（symMerge）、堆排序（heapSort）和快速排序（quickSort）； sort 包会依据实际数据自动选择最优的排序算法。所以我们写代码时只需要考虑实现 sort.Interface 这个类型就可以了。
+type Interface interface {
+    Len() int           // Len方法返回集合中的元素个数
+    Less(i, j int) bool // i>j，该方法返回索引i的元素是否比索引j的元素小
+    Swap(i, j int)      // 交换i, j的值
+}

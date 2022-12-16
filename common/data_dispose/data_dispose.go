@@ -1,16 +1,19 @@
 package dataDispose
 
 import (
-	corev1 "k8s.io/api/core/v1"
 	"sort"
 	"strings"
 	"time"
+
+	appsv1 "k8s.io/api/apps/v1"
+	corev1 "k8s.io/api/core/v1"
+	nwv1 "k8s.io/api/networking/v1"
 )
 
 // 用于封装排序、过滤、分页的数据类型
 type DataSelector struct {
 	GenericDataList []DataCell
-	dataSelectQuery *DataSelectQuery
+	DataSelectQuery *DataSelectQuery
 }
 
 // 用于各种资源list的类型转换，转换后可以使用dataSelector的自定义排序方法
@@ -54,19 +57,19 @@ func (d *DataSelector) Swap(i, j int) {
 func (d *DataSelector) Less(i, j int) bool {
 	a := d.GenericDataList[i].GetCreation()
 	b := d.GenericDataList[j].GetCreation()
-	return b.Before(a)
+	return b.Before(a) // b在a之前
 }
 
-//重写以上3个方法用使用sort.Sort进行排序
+// 重写以上3个方法用使用sort.Sort进行排序
 func (d *DataSelector) Sort() *DataSelector {
 	sort.Sort(d)
 	return d
 }
 
-//Filter方法用于过滤元素，比较元素的Name属性，若包含，再返回
+// 过滤元素，比较元素的Name属性，若包含，再返回
 func (d *DataSelector) Filter() *DataSelector {
-	//若Name的传参为空，则返回所有元素
-	if d.dataSelectQuery.FilterQuery.Name == "" {
+	// 若Name的传参为空，则返回所有元素
+	if d.DataSelectQuery.FilterQuery.Name == "" {
 		return d
 	}
 	//若Name的传参不为空，则返回元素名中包含Name的所有元素
@@ -74,7 +77,7 @@ func (d *DataSelector) Filter() *DataSelector {
 	for _, value := range d.GenericDataList {
 		matches := true
 		objName := value.GetName()
-		if !strings.Contains(objName, d.dataSelectQuery.FilterQuery.Name) {
+		if !strings.Contains(objName, d.DataSelectQuery.FilterQuery.Name) {
 			matches = false
 			continue
 		}
@@ -87,19 +90,19 @@ func (d *DataSelector) Filter() *DataSelector {
 	return d
 }
 
-//Paginate方法用于数组分页，根据Limit和Page的传参，返回数据
-func (d *DataSelector) Paginate() *dataSelector {
-	limit := d.dataSelectQuery.PaginateQuery.Limit
-	page := d.dataSelectQuery.PaginateQuery.Page
-	//验证参数合法，若参数不合法，则返回所有数据
+// 数组分页，根据Limit和Page的传参，返回数据
+func (d *DataSelector) Paginate() *DataSelector {
+	limit := d.DataSelectQuery.PaginateQuery.Limit
+	page := d.DataSelectQuery.PaginateQuery.Page
+	// 验证参数合法，若参数不合法，则返回所有数据
 	if limit <= 0 || page <= 0 {
 		return d
 	}
-	//举例：25个元素的数组，limit是10，page是3，startIndex是20，endIndex是30（实际上endIndex是25）
+	// 举例：25个元素的数组，limit是10，page是3，startIndex是20，endIndex是30（实际上endIndex是25）0开始
 	startIndex := limit * (page - 1)
 	endIndex := limit * page
 
-	//处理最后一页，这时候就把endIndex由30改为25了
+	// 处理最后一页，这时候就把endIndex由30改为25了
 	if len(d.GenericDataList) < endIndex {
 		endIndex = len(d.GenericDataList)
 	}
@@ -108,14 +111,14 @@ func (d *DataSelector) Paginate() *dataSelector {
 	return d
 }
 
-//定义podCell类型，实现GetCreateion和GetName方法后，可进行类型转换
-type podCell corev1.Pod
+// podCell类型，实现GetCreateion和GetName方法后，可进行类型转换(pod实现方法)
+type PodCell corev1.Pod
 
-func (p podCell) GetCreation() time.Time {
+func (p PodCell) GetCreation() time.Time {
 	return p.CreationTimestamp.Time
 }
 
-func (p podCell) GetName() string {
+func (p PodCell) GetName() string {
 	return p.Name
 }
 

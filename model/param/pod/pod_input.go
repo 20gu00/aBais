@@ -7,3 +7,9 @@ type GetPodsInput struct {
 	Limit      int    `form:"limit"`
 	Cluster    string `form:"cluster"`
 }
+
+type GetPodDetailInput struct {
+	PodName   string `form:"pod_name"`
+	Namespace string `form:"namespace"`
+	Cluster   string `form:"cluster"`
+}
