@@ -13,6 +13,7 @@ func InitRouter() *gin.Engine {
 		logger.GinLogger(),
 		logger.GinRecovery(true),
 		middleware.JWTAuth(),
+		middleware.Cors(),
 	)
 
 	SetupRouter(r)

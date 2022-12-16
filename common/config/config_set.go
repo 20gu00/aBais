@@ -12,6 +12,9 @@ var Config = new(AppConfig)
 type AppConfig struct {
 	Addr          string `mapstructure:"Addr"`
 	WSAddr        string `mapstructure:"WsAddr"`
+	ReadTimeout   int    `mapstructure:"read_timeout"`
+	WriteTimeout  int    `mapstructure:"write_timeout"`
+	MaxHeader     int    `mapstructure:"max_header"`
 	KubeConfigs   string `mapstructure:"kubeConfigs"`
 	AdminUser     string `mapstructure:"AdminUser"`
 	AdminPassword string `mapstructure:"AdminPwd"`

@@ -1,4 +1,4 @@
-package k8s_clientset
+package k8sClient
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 )
 
-// 实例化 k8s{xxx}
+// 直接通过var实例化 k8s{xxx}  (Newxxx)
 var K8s k8s
 
 type k8s struct {

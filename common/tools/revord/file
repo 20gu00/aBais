@@ -38,3 +38,16 @@ Cross-Origin Resource Sharing
 
 访问前端服务所处的服务器
 CORS是一种机制，该机制使用附加的HTTP header来告诉浏览器，准许运行在一个源上的Web应用访问位于另一不同源选定的资源。 当一个Web应用发起一个与自身所在源（域，协议和端口）不同的HTTP请求时，它发起的即跨源HTTP请求。
+
+var Login login
+
+type login struct {}  简单的方法接收者
+
+query param ?=
+
+
+
+token可以不存储在mysql中
+gorm:"column: icon_url"`  针对IconUrl这种
+
+一般get请求为form格式，其他请求为json格式(需要结构体的话要定义tag json)
