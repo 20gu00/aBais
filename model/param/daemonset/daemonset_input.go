@@ -13,3 +13,15 @@ type GetDaemonsetDetailInput struct {
 	Namespace     string `form:"namespace"`
 	Cluster       string `form:"cluster"`
 }
+
+type DeleteDaemonsetInput struct {
+	DaemonSetName string `json:"daemonset_name"`
+	Namespace     string `json:"namespace"`
+	Cluster       string `json:"cluster"`
+}
+
+type UpdateDaemonsetInput struct {
+	Namespace string `json:"namespace"`
+	Content   string `json:"content"`
+	Cluster   string `json:"cluster"`
+}

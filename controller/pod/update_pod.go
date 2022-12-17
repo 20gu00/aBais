@@ -14,7 +14,7 @@ import (
 func UpdatePod(ctx *gin.Context) {
 	// 1.参数校验 绑定
 	params := new(param.UpdatePodInput)
-	//PUT请求，绑定参数方法改为ctx.ShouldBindJSON
+	// PUT ShouldBindJSON
 	if err := ctx.ShouldBindJSON(params); err != nil {
 		zap.L().Error("C-UpdatePod 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)

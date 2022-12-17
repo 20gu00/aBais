@@ -6,6 +6,7 @@ import (
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/pod"
+	"github.com/20gu00/aBais/controller/statefulset"
 
 	"github.com/gin-gonic/gin"
 )
@@ -50,5 +51,11 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/daemonsets", daemonset.GetDaemonSets).
 		GET("/api/k8s/daemonset/detail", daemonset.GetDaemonSetDetail).
 		DELETE("/api/k8s/daemonset/del", daemonset.DeleteDaemonSet).
-		PUT("/api/k8s/daemonset/update", daemonset.UpdateDaemonSet)
+		PUT("/api/k8s/daemonset/update", daemonset.UpdateDaemonSet).
+
+		// statefulset
+		GET("/api/k8s/statefulsets", statefulset.GetStatefulSets).
+		GET("/api/k8s/statefulset/detail", statefulset.GetStatefulSetDetail).
+		DELETE("/api/k8s/statefulset/del", statefulset.DeleteStatefulSet).
+		PUT("/api/k8s/statefulset/update", statefulset.UpdateStatefulSet)
 }

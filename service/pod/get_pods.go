@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	dataDispose "github.com/20gu00/aBais/common/data_dispose"
+	dataDispose "github.com/20gu00/aBais/common/data-dispose"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"

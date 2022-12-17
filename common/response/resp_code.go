@@ -37,6 +37,14 @@ const (
 	// daemonset
 	CodeGetDaemonsetErr
 	CodeGetDaemonsetDetailErr
+	CodeDeleteDaemonsetErr
+	CodeUpdateDaemonsetErr
+
+	// statefulset
+	CodeGetStatefulsetErr
+	CodeGetStatefulsetDetailErr
+	CodeDeleteStatefulsetErr
+	CodeUpdateStatefulsetErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -72,6 +80,14 @@ var codeMsgMap = map[respCode]string{
 	// daemonset
 	CodeGetDaemonsetErr:       "获取daemonset失败",
 	CodeGetDaemonsetDetailErr: "获取daemonset详情失败",
+	CodeDeleteDaemonsetErr:    "删除daemonset失败",
+	CodeUpdateDaemonsetErr:    "更新daemonset失败",
+
+	// statefulset
+	CodeGetStatefulsetErr:       "获取statefulset列表失败",
+	CodeGetStatefulsetDetailErr: "获取statefulset详情失败",
+	CodeDeleteStatefulsetErr:    "删除statefulset失败",
+	CodeUpdateStatefulsetErr:    "更新statefulset失败",
 }
 
 // 基本的返回描述msg
