@@ -3,7 +3,9 @@ package router
 import (
 	"github.com/20gu00/aBais/common/response"
 	"github.com/20gu00/aBais/controller/admin"
+	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/pod"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -34,12 +36,18 @@ func SetupRouter(r *gin.Engine) {
 		GET("/pod/numnp", pod.GetPodNumPerNs).
 
 		// deployment
-		GET("/api/k8s/deployments", Deployment.GetDeployments).
-		GET("/api/k8s/deployment/detail", Deployment.GetDeploymentDetail).
-		PUT("/api/k8s/deployment/scale", Deployment.ScaleDeployment).
-		DELETE("/api/k8s/deployment/del", Deployment.DeleteDeployment).
-		PUT("/api/k8s/deployment/restart", Deployment.RestartDeployment).
-		PUT("/api/k8s/deployment/update", Deployment.UpdateDeployment).
-		GET("/api/k8s/deployment/numnp", Deployment.GetDeployNumPerNp).
-		POST("/api/k8s/deployment/create", Deployment.CreateDeployment).
+		GET("/api/k8s/deployments", deployment.GetDeployments).
+		GET("/api/k8s/deployment/detail", deployment.GetDeploymentDetail).
+		PUT("/api/k8s/deployment/scale", deployment.ScaleDeployment).
+		DELETE("/api/k8s/deployment/del", deployment.DeleteDeployment).
+		PUT("/api/k8s/deployment/restart", deployment.RestartDeployment).
+		PUT("/api/k8s/deployment/update", deployment.UpdateDeployment).
+		GET("/api/k8s/deployment/numnp", deployment.GetDeployNumPerNs).
+		POST("/api/k8s/deployment/create", deployment.CreateDeployment).
+
+		// daemonset
+		GET("/api/k8s/daemonsets", daemonset.GetDaemonSets).
+		GET("/api/k8s/daemonset/detail", daemonset.GetDaemonSetDetail).
+		DELETE("/api/k8s/daemonset/del", daemonset.DeleteDaemonSet).
+		PUT("/api/k8s/daemonset/update", daemonset.UpdateDaemonSet)
 }

@@ -1,9 +1,12 @@
 # app监听地址
 Addr: "0.0.0.0:9090"
 WsAddr: "0.0.0.0:9091"
+
 read_timeout: 20
 write_timeout: 20
 max_header: 20
+mode: "dev"  # dev prod
+
 
 # kubeconfig路径(多集群)
 # Kubeconfigs = `{"Cluster-1":"/root/.kube/config","Cluster-2":"/Users/adoo/.kube/config"}`

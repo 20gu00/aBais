@@ -14,3 +14,25 @@ type ScaleDeployment struct {
 	ScaleNum       int    `json:"scale_num"`
 	Cluster        string `json:"cluster"`
 }
+
+type DeleteDeployment struct {
+	DeploymentName string `json:"deployment_name"`
+	Namespace      string `json:"namespace"`
+	Cluster        string `json:"cluster"`
+}
+
+type RestartDeployment struct {
+	DeploymentName string `json:"deployment_name"`
+	Namespace      string `json:"namespace"`
+	Cluster        string `json:"cluster"`
+}
+
+type UpdateDeployment struct {
+	Namespace string `json:"namespace"`
+	Content   string `json:"content"`
+	Cluster   string `json:"cluster"`
+}
+
+type GetDeployNumPerNs struct {
+	Cluster string `form:"cluster"`
+}

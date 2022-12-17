@@ -18,6 +18,7 @@ type AppConfig struct {
 	KubeConfigs   string `mapstructure:"kubeConfigs"`
 	AdminUser     string `mapstructure:"AdminUser"`
 	AdminPassword string `mapstructure:"AdminPwd"`
+	Mode          string `mapstructure:"mode"`
 
 	PodLogTailLine int  `mapstructure:"PodLogTailLine"`
 	LogMode        bool `mapstructure:"LogMode"`

@@ -29,6 +29,10 @@ const (
 	CodeGetDeploymentListrErr
 	CodeGetDeploymentDetailErr
 	CodeScaleDeploymentErr
+	CodeDeleteDeploymentErr
+	CodeRestartDeploymentErr
+	CodeUpdateDeploymentErr
+	CodeGetDeploymentPerNsErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -56,6 +60,10 @@ var codeMsgMap = map[respCode]string{
 	CodeGetDeploymentListrErr:  "获取deployment列表失败",
 	CodeGetDeploymentDetailErr: "获取deployment详情失败",
 	CodeScaleDeploymentErr:     "调整deployment副本数目失败",
+	CodeDeleteDeploymentErr:    "删除deployment失败",
+	CodeRestartDeploymentErr:   "重启deployment失败",
+	CodeUpdateDeploymentErr:    "更新deployment失败",
+	CodeGetDeploymentPerNsErr:  "根据ns获取deployment失败",
 }
 
 // 基本的返回描述msg
