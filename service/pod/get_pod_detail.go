@@ -10,12 +10,12 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-//获取pod详情
+// 获取pod详情
 func (p *pod) GetPodDetail(client *kubernetes.Clientset, podName, namespace string) (pod *corev1.Pod, err error) {
-	pod, err = client.CoreV1().Pods(namespace).Get(context.TODO(), podName, metav1.GetOptions{})
+	pod, err = client.CoreV1().Pods(namespace).Get(context.TODO(), podName, metav1.GetOptions{}) //Background
 	if err != nil {
-		zap.L().Error("获取Pod详情失败, ", zap.Error(err))
-		return nil, errors.New("获取Pod详情失败, " + err.Error())
+		zap.L().Error("S-GetPodDetail 获取Pod详情失败", zap.Error(err))
+		return nil, errors.New("获取Pod详情失败: " + err.Error())
 	}
 
 	return pod, nil

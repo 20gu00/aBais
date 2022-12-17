@@ -24,7 +24,7 @@ func (p *pod) GetPods(client *kubernetes.Clientset, filterName, namespace string
 	// 获取podList类型的pod列表
 	podList, err := client.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
-		zap.L().Error("获取Pod列表失败, ", zap.Error(err))
+		zap.L().Error("S-GetPods 获取Pod列表失败, ", zap.Error(err))
 		return nil, errors.New("获取Pod列表失败, " + err.Error())
 	}
 	// 实例化dataSelector对象

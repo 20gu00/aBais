@@ -15,7 +15,7 @@ func GetPods(ctx *gin.Context) {
 	params := new(param.GetPodsInput)
 	// form格式 ctx.Bind
 	if err := ctx.Bind(params); err != nil {
-		zap.L().Error("GetPods 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-GetPods 绑定请求参数失败, ", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}
@@ -24,12 +24,14 @@ func GetPods(ctx *gin.Context) {
 	// 获取k8s的client
 	client, err := k8sClient.K8s.GetK8sClient(params.Cluster)
 	if err != nil {
+		zap.L().Error("C-GetPods 获取k8s的client失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
 	// 获取pods
 	data, err := pod.Pod.GetPods(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
+		zap.L().Error("C-GetPods 获取pod列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPodListErr)
 		return
 	}

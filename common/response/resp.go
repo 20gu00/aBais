@@ -24,11 +24,16 @@ type Resp struct {
 }
 
 func RespInternalErr(c *gin.Context, code respCode) {
-	c.JSON(http.StatusInternalServerError, &Resp{
-		Code: code,
-		Msg:  code.Msg(),
-		Data: nil,
+	c.JSON(http.StatusInternalServerError, gin.H{
+		"code": code,
+		"msg":  code.Msg(),
+		"data": nil,
 	})
+	//c.JSON(http.StatusInternalServerError, &Resp{
+	//	Code: code,
+	//	Msg:  code.Msg(),
+	//	Data: nil,
+	//})
 }
 
 func RespErr(c *gin.Context, code respCode) {

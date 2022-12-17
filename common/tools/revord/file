@@ -59,3 +59,35 @@ type Interface interface {
     Less(i, j int) bool // i>j，该方法返回索引i的元素是否比索引j的元素小
     Swap(i, j int)      // 交换i, j的值
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+json字符串

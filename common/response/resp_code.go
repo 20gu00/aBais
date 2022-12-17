@@ -15,7 +15,15 @@ const (
 	CodeTwoDevice                                // 2007
 
 	CodeGetK8sClientErr // 2008
-	CodeGetPodListErr   // 2009
+
+	//pod
+	CodeGetPodListErr // 2009
+	CodeGetPodDetailErr
+	CodeDeletePodErr
+	CodeUpdatePodErr
+	CodePodContainerLogErr
+	CodeGetNumByNsErr
+	CodeGetPodContainerErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -27,8 +35,17 @@ var codeMsgMap = map[respCode]string{
 	CodeInvalidPassword:   "用户名或密码错误",
 	CodeNeedLogin:         "需要登录",
 	CodeInvalidToken:      "无效的token",
-	CodeGetK8sClientErr:   "获取操作k8s的client失败",
-	CodeGetPodListErr:     "获取pod列表失败",
+
+	CodeGetK8sClientErr: "获取操作k8s的client失败",
+
+	//pod
+	CodeGetPodListErr:      "获取pod列表失败",
+	CodeGetPodDetailErr:    "获取pod详情失败",
+	CodeDeletePodErr:       "删除pod失败",
+	CodeUpdatePodErr:       "更新pod失败",
+	CodePodContainerLogErr: "获取pod中的容器日志失败",
+	CodeGetNumByNsErr:      "根据ns获取pod数目失败",
+	CodeGetPodContainerErr: "获取pod中的容器失败",
 }
 
 // 基本的返回描述msg
