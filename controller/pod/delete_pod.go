@@ -32,7 +32,7 @@ func DeletePod(ctx *gin.Context) {
 	}
 	err = pod.Pod.DeletePod(client, params.PodName, params.Namespace)
 	if err != nil {
-		zap.L().Error("C-DeletePod 获删除pod失败", zap.Error(err))
+		zap.L().Error("C-DeletePod 删除pod失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeletePodErr)
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"msg":  err.Error(),

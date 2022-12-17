@@ -23,14 +23,23 @@ func SetupRouter(r *gin.Engine) {
 
 	k8sRouter := apiV1.Group("/k8s")
 
-	// pod
 	k8sRouter.
+		// pod
 		GET("/pods", pod.GetPods).
 		GET("/pod/detail", pod.GetPodDetail).
 		DELETE("/pod/delete", pod.DeletePod).
 		PUT("/pod/update", pod.UpdatePod).
 		GET("/pod/container", pod.GetPodContainer).
 		GET("/pod/log", pod.GetPodLog).
-		GET("/pod/numnp", pod.GetPodNumPerNp).)
+		GET("/pod/numnp", pod.GetPodNumPerNs).
 
+		// deployment
+		GET("/api/k8s/deployments", Deployment.GetDeployments).
+		GET("/api/k8s/deployment/detail", Deployment.GetDeploymentDetail).
+		PUT("/api/k8s/deployment/scale", Deployment.ScaleDeployment).
+		DELETE("/api/k8s/deployment/del", Deployment.DeleteDeployment).
+		PUT("/api/k8s/deployment/restart", Deployment.RestartDeployment).
+		PUT("/api/k8s/deployment/update", Deployment.UpdateDeployment).
+		GET("/api/k8s/deployment/numnp", Deployment.GetDeployNumPerNp).
+		POST("/api/k8s/deployment/create", Deployment.CreateDeployment).
 }

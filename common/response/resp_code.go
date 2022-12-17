@@ -24,6 +24,11 @@ const (
 	CodePodContainerLogErr
 	CodeGetNumByNsErr
 	CodeGetPodContainerErr
+
+	//deployment
+	CodeGetDeploymentListrErr
+	CodeGetDeploymentDetailErr
+	CodeScaleDeploymentErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -46,6 +51,11 @@ var codeMsgMap = map[respCode]string{
 	CodePodContainerLogErr: "获取pod中的容器日志失败",
 	CodeGetNumByNsErr:      "根据ns获取pod数目失败",
 	CodeGetPodContainerErr: "获取pod中的容器失败",
+
+	// deployment
+	CodeGetDeploymentListrErr:  "获取deployment列表失败",
+	CodeGetDeploymentDetailErr: "获取deployment详情失败",
+	CodeScaleDeploymentErr:     "调整deployment副本数目失败",
 }
 
 // 基本的返回描述msg

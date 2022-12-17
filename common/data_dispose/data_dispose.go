@@ -122,112 +122,112 @@ func (p PodCell) GetName() string {
 	return p.Name
 }
 
-type deploymentCell appsv1.Deployment
+type DeploymentCell appsv1.Deployment
 
-func (d deploymentCell) GetCreation() time.Time {
+func (d DeploymentCell) GetCreation() time.Time {
 	return d.CreationTimestamp.Time
 }
 
-func (d deploymentCell) GetName() string {
+func (d DeploymentCell) GetName() string {
 	return d.Name
 }
 
-type daemonSetCell appsv1.DaemonSet
+type DaemonSetCell appsv1.DaemonSet
 
-func (d daemonSetCell) GetCreation() time.Time {
+func (d DaemonSetCell) GetCreation() time.Time {
 	return d.CreationTimestamp.Time
 }
 
-func (d daemonSetCell) GetName() string {
+func (d DaemonSetCell) GetName() string {
 	return d.Name
 }
 
-type statefulSetCell appsv1.StatefulSet
+type StatefulSetCell appsv1.StatefulSet
 
-func (s statefulSetCell) GetCreation() time.Time {
+func (s StatefulSetCell) GetCreation() time.Time {
 	return s.CreationTimestamp.Time
 }
 
-func (s statefulSetCell) GetName() string {
+func (s StatefulSetCell) GetName() string {
 	return s.Name
 }
 
-type serviceCell corev1.Service
+type ServiceCell corev1.Service
 
-func (s serviceCell) GetCreation() time.Time {
+func (s ServiceCell) GetCreation() time.Time {
 	return s.CreationTimestamp.Time
 }
 
-func (s serviceCell) GetName() string {
+func (s ServiceCell) GetName() string {
 	return s.Name
 }
 
-type ingressCell nwv1.Ingress
+type IngressCell nwv1.Ingress
 
-func (i ingressCell) GetCreation() time.Time {
+func (i IngressCell) GetCreation() time.Time {
 	return i.CreationTimestamp.Time
 }
 
-func (i ingressCell) GetName() string {
+func (i IngressCell) GetName() string {
 	return i.Name
 }
 
-type configMapCell corev1.ConfigMap
+type ConfigMapCell corev1.ConfigMap
 
-func (c configMapCell) GetCreation() time.Time {
+func (c ConfigMapCell) GetCreation() time.Time {
 	return c.CreationTimestamp.Time
 }
 
-func (c configMapCell) GetName() string {
+func (c ConfigMapCell) GetName() string {
 	return c.Name
 }
 
-type secretCell corev1.Secret
+type SecretCell corev1.Secret
 
-func (s secretCell) GetCreation() time.Time {
+func (s SecretCell) GetCreation() time.Time {
 	return s.CreationTimestamp.Time
 }
 
-func (s secretCell) GetName() string {
+func (s SecretCell) GetName() string {
 	return s.Name
 }
 
-type pvcCell corev1.PersistentVolumeClaim
+type PvcCell corev1.PersistentVolumeClaim
 
-func (p pvcCell) GetCreation() time.Time {
+func (p PvcCell) GetCreation() time.Time {
 	return p.CreationTimestamp.Time
 }
 
-func (p pvcCell) GetName() string {
+func (p PvcCell) GetName() string {
 	return p.Name
 }
 
-type nodeCell corev1.Node
+type NodeCell corev1.Node
 
-func (n nodeCell) GetCreation() time.Time {
+func (n NodeCell) GetCreation() time.Time {
 	return n.CreationTimestamp.Time
 }
 
-func (n nodeCell) GetName() string {
+func (n NodeCell) GetName() string {
 	return n.Name
 }
 
-type namespaceCell corev1.Namespace
+type NamespaceCell corev1.Namespace
 
-func (n namespaceCell) GetCreation() time.Time {
+func (n NamespaceCell) GetCreation() time.Time {
 	return n.CreationTimestamp.Time
 }
 
-func (n namespaceCell) GetName() string {
+func (n NamespaceCell) GetName() string {
 	return n.Name
 }
 
-type pvCell corev1.PersistentVolume
+type PvCell corev1.PersistentVolume
 
-func (p pvCell) GetCreation() time.Time {
+func (p PvCell) GetCreation() time.Time {
 	return p.CreationTimestamp.Time
 }
 
-func (p pvCell) GetName() string {
+func (p PvCell) GetName() string {
 	return p.Name
 }
