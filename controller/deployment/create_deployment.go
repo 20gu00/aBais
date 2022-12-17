@@ -3,7 +3,6 @@ package deployment
 import (
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
-	param "github.com/20gu00/aBais/model/param/deployment"
 	"github.com/20gu00/aBais/service/deployment"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +12,7 @@ import (
 // 创建deployment
 func CreateDeployment(ctx *gin.Context) {
 	var (
-		deployCreate = new(param.DeployCreate)
+		deployCreate = new(deployment.DeployCreate)
 		err          error
 	)
 

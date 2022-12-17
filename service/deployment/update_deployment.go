@@ -17,13 +17,13 @@ func (d *deployment) UpdateDeployment(client *kubernetes.Clientset, namespace, c
 
 	err = json.Unmarshal([]byte(content), deploy)
 	if err != nil {
-		zap.L().Error("C-UpdateDeployment 反序列化失败, ", zap.Error(err))
+		zap.L().Error("C-UpdateDeployment 反序列化失败", zap.Error(err))
 		return errors.New("反序列化失败, " + err.Error())
 	}
 
 	_, err = client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, metav1.UpdateOptions{})
 	if err != nil {
-		zap.L().Error("C-UpdateDeployment 更新Deployment失败, ", zap.Error(err))
+		zap.L().Error("C-UpdateDeployment 更新Deployment失败", zap.Error(err))
 		return errors.New("更新Deployment失败, " + err.Error())
 	}
 	return nil

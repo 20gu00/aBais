@@ -57,5 +57,12 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/statefulsets", statefulset.GetStatefulSets).
 		GET("/api/k8s/statefulset/detail", statefulset.GetStatefulSetDetail).
 		DELETE("/api/k8s/statefulset/del", statefulset.DeleteStatefulSet).
-		PUT("/api/k8s/statefulset/update", statefulset.UpdateStatefulSet)
+		PUT("/api/k8s/statefulset/update", statefulset.UpdateStatefulSet).
+
+		// service
+		GET("/api/k8s/services", service.GetServices).
+		GET("/api/k8s/service/detail", service.GetServiceDetail).
+		DELETE("/api/k8s/service/del", service.DeleteService).
+		PUT("/api/k8s/service/update", service.UpdateService).
+		POST("/api/k8s/service/create", service.CreateService)
 }

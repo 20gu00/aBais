@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+
 	"go.uber.org/zap"
 	appsv1 "k8s.io/api/apps/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,7 +17,7 @@ func (s *statefulSet) UpdateStatefulSet(client *kubernetes.Clientset, namespace,
 
 	err = json.Unmarshal([]byte(content), statefulSet)
 	if err != nil {
-		zap.L().Error("C-UpdateStatefulSet 反序列化失败, ", zap.Error(err))
+		zap.L().Error("C-UpdateStatefulSet 反序列化失败", zap.Error(err))
 		return errors.New("反序列化失败, " + err.Error())
 	}
 

@@ -14,7 +14,7 @@ import (
 func (s *statefulSet) GetStatefulSetDetail(client *kubernetes.Clientset, statefulSetName, namespace string) (statefulSet *appsv1.StatefulSet, err error) {
 	statefulSet, err = client.AppsV1().StatefulSets(namespace).Get(context.TODO(), statefulSetName, metav1.GetOptions{})
 	if err != nil {
-		zap.L().Error("S-GetStatefulSetDetail 获取StatefulSet详情失败, ", zap.Error(err))
+		zap.L().Error("S-GetStatefulSetDetail 获取StatefulSet详情失败", zap.Error(err))
 		return nil, errors.New("获取StatefulSet详情失败, " + err.Error())
 	}
 

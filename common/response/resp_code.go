@@ -45,6 +45,13 @@ const (
 	CodeGetStatefulsetDetailErr
 	CodeDeleteStatefulsetErr
 	CodeUpdateStatefulsetErr
+
+	//service
+	CodeGetSvcErr
+	CodeGetSvcDetailErr
+	CodeUpdateSvcErr
+	CodeDeleteSvcErr
+	CodeCreateSvcErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -88,6 +95,13 @@ var codeMsgMap = map[respCode]string{
 	CodeGetStatefulsetDetailErr: "获取statefulset详情失败",
 	CodeDeleteStatefulsetErr:    "删除statefulset失败",
 	CodeUpdateStatefulsetErr:    "更新statefulset失败",
+
+	// service
+	CodeGetSvcErr:       "获取svc失败",
+	CodeGetSvcDetailErr: "获取svc详情失败",
+	CodeUpdateSvcErr:    "更新svc失败",
+	CodeDeleteSvcErr:    "删除svc失败",
+	CodeCreateSvcErr:    "创建svc失败",
 }
 
 // 基本的返回描述msg
