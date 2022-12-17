@@ -15,7 +15,7 @@ func GetDeployments(ctx *gin.Context) {
 	// 1.参数
 	params := new(param.GetDeploymentInput)
 	if err := ctx.Bind(params); err != nil {
-		zap.L().Error("C-GetDeployments 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-GetDeployments 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}

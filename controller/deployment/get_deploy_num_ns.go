@@ -14,7 +14,7 @@ func GetDeployNumPerNs(ctx *gin.Context) {
 	// 1.参数
 	params := new(param.GetDeployNumPerNs)
 	if err := ctx.Bind(params); err != nil {
-		zap.L().Error("C-GetDeployNumPerNs 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-GetDeployNumPerNs 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}

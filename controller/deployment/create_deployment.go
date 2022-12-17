@@ -19,7 +19,7 @@ func CreateDeployment(ctx *gin.Context) {
 
 	// 1.参数
 	if err = ctx.ShouldBindJSON(deployCreate); err != nil {
-		zap.L().Error("C-CreateDeployment 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-CreateDeployment 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}

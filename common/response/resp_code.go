@@ -33,6 +33,10 @@ const (
 	CodeRestartDeploymentErr
 	CodeUpdateDeploymentErr
 	CodeGetDeploymentPerNsErr
+
+	// daemonset
+	CodeGetDaemonsetErr
+	CodeGetDaemonsetDetailErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -64,6 +68,10 @@ var codeMsgMap = map[respCode]string{
 	CodeRestartDeploymentErr:   "重启deployment失败",
 	CodeUpdateDeploymentErr:    "更新deployment失败",
 	CodeGetDeploymentPerNsErr:  "根据ns获取deployment失败",
+
+	// daemonset
+	CodeGetDaemonsetErr:       "获取daemonset失败",
+	CodeGetDaemonsetDetailErr: "获取daemonset详情失败",
 }
 
 // 基本的返回描述msg

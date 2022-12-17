@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/20gu00/aBais/common/response"
 	"github.com/20gu00/aBais/controller/admin"
+	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/pod"
 

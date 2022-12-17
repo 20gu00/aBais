@@ -16,7 +16,7 @@ func DeleteDeployment(ctx *gin.Context) {
 	params := new(param.DeleteDeployment)
 	// DELETE ShouldBindJSON
 	if err := ctx.ShouldBindJSON(params); err != nil {
-		zap.L().Error("C-DeleteDeployment 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-DeleteDeployment 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}

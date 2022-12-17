@@ -16,7 +16,7 @@ func RestartDeployment(ctx *gin.Context) {
 	params := new(param.RestartDeployment)
 	// PUT ShouldBindJSON
 	if err := ctx.ShouldBindJSON(params); err != nil {
-		zap.L().Error("C-RestartDeployment 绑定请求参数失败, ", zap.Error(err))
+		zap.L().Error("C-RestartDeployment 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}
