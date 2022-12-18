@@ -8,6 +8,7 @@ import (
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/ingress"
 	"github.com/20gu00/aBais/controller/pod"
+	"github.com/20gu00/aBais/controller/pvc"
 	"github.com/20gu00/aBais/controller/secret"
 	"github.com/20gu00/aBais/controller/service"
 	"github.com/20gu00/aBais/controller/statefulset"
@@ -39,53 +40,59 @@ func SetupRouter(r *gin.Engine) {
 		PUT("/pod/update", pod.UpdatePod).
 		GET("/pod/container", pod.GetPodContainer).
 		GET("/pod/log", pod.GetPodLog).
-		GET("/pod/numnp", pod.GetPodNumPerNs).
+		GET("/pod/numns", pod.GetPodNumPerNs).
 
 		// deployment
-		GET("/api/k8s/deployments", deployment.GetDeployments).
-		GET("/api/k8s/deployment/detail", deployment.GetDeploymentDetail).
-		PUT("/api/k8s/deployment/scale", deployment.ScaleDeployment).
-		DELETE("/api/k8s/deployment/del", deployment.DeleteDeployment).
-		PUT("/api/k8s/deployment/restart", deployment.RestartDeployment).
-		PUT("/api/k8s/deployment/update", deployment.UpdateDeployment).
-		GET("/api/k8s/deployment/numnp", deployment.GetDeployNumPerNs).
-		POST("/api/k8s/deployment/create", deployment.CreateDeployment).
+		GET("/deployments", deployment.GetDeployments).
+		GET("/deployment/detail", deployment.GetDeploymentDetail).
+		PUT("/deployment/scale", deployment.ScaleDeployment).
+		DELETE("/deployment/delete", deployment.DeleteDeployment).
+		PUT("/deployment/restart", deployment.RestartDeployment).
+		PUT("/deployment/update", deployment.UpdateDeployment).
+		GET("/deployment/numns", deployment.GetDeployNumPerNs).
+		POST("/deployment/create", deployment.CreateDeployment).
 
 		// daemonset
-		GET("/api/k8s/daemonsets", daemonset.GetDaemonSets).
-		GET("/api/k8s/daemonset/detail", daemonset.GetDaemonSetDetail).
-		DELETE("/api/k8s/daemonset/del", daemonset.DeleteDaemonSet).
-		PUT("/api/k8s/daemonset/update", daemonset.UpdateDaemonSet).
+		GET("/daemonsets", daemonset.GetDaemonSets).
+		GET("/daemonset/detail", daemonset.GetDaemonSetDetail).
+		DELETE("/daemonset/delete", daemonset.DeleteDaemonSet).
+		PUT("/daemonset/update", daemonset.UpdateDaemonSet).
 
 		// statefulset
-		GET("/api/k8s/statefulsets", statefulset.GetStatefulSets).
-		GET("/api/k8s/statefulset/detail", statefulset.GetStatefulSetDetail).
-		DELETE("/api/k8s/statefulset/del", statefulset.DeleteStatefulSet).
-		PUT("/api/k8s/statefulset/update", statefulset.UpdateStatefulSet).
+		GET("/statefulsets", statefulset.GetStatefulSets).
+		GET("/statefulset/detail", statefulset.GetStatefulSetDetail).
+		DELETE("/statefulset/delete", statefulset.DeleteStatefulSet).
+		PUT("/statefulset/update", statefulset.UpdateStatefulSet).
 
 		// service
-		GET("/api/k8s/services", service.GetServices).
-		GET("/api/k8s/service/detail", service.GetServiceDetail).
-		DELETE("/api/k8s/service/del", service.DeleteService).
-		PUT("/api/k8s/service/update", service.UpdateService).
-		POST("/api/k8s/service/create", service.CreateService).
+		GET("/services", service.GetServices).
+		GET("/service/detail", service.GetServiceDetail).
+		DELETE("/service/delete", service.DeleteService).
+		PUT("/service/update", service.UpdateService).
+		POST("/service/create", service.CreateService).
 
 		// ingress
-		GET("/api/k8s/ingresses", ingress.GetIngresses).
-		GET("/api/k8s/ingress/detail", ingress.GetIngressDetail).
-		DELETE("/api/k8s/ingress/del", ingress.DeleteIngress).
-		PUT("/api/k8s/ingress/update", ingress.UpdateIngress).
-		POST("/api/k8s/ingress/create", ingress.CreateIngress).
+		GET("/ingresses", ingress.GetIngresses).
+		GET("/ingress/detail", ingress.GetIngressDetail).
+		DELETE("/ingress/delete", ingress.DeleteIngress).
+		PUT("/ingress/update", ingress.UpdateIngress).
+		POST("/ingress/create", ingress.CreateIngress).
 
 		// configmap
-		GET("/api/k8s/configmaps", cm.GetConfigMaps).
-		GET("/api/k8s/configmap/detail", cm.GetConfigMapDetail).
-		DELETE("/api/k8s/configmap/del", cm.DeleteConfigMap).
-		PUT("/api/k8s/configmap/update", cm.UpdateConfigMap).
+		GET("/configmaps", cm.GetConfigMaps).
+		GET("/configmap/detail", cm.GetConfigMapDetail).
+		DELETE("/configmap/del", cm.DeleteConfigMap).
+		PUT("/configmap/update", cm.UpdateConfigMap).
 
 		// secret
-		GET("/api/k8s/secrets", secret.GetSecrets).
-		GET("/api/k8s/secret/detail", secret.GetSecretDetail).
-		DELETE("/api/k8s/secret/del", secret.DeleteSecret).
-		PUT("/api/k8s/secret/update", secret.UpdateSecret)
+		GET("/secrets", secret.GetSecrets).
+		GET("/secret/detail", secret.GetSecretDetail).
+		DELETE("/secret/delete", secret.DeleteSecret).
+		PUT("/secret/update", secret.UpdateSecret).
+
+		// pvc
+		GET("/pvcs", pvc.GetPvcs).
+		GET("/pvc/detail", pvc.GetPvcDetail).
+		DELETE("/pvc/delete", pvc.DeletePvc).
+		PUT("/pvc/update", pvc.UpdatePvc)
 }

@@ -8,7 +8,13 @@ type GetIngressInput struct {
 	Cluster    string `form:"cluster"`
 }
 
-type CommonIngressDetailInput struct {
+type GetIngressDetailInput struct {
+	IngressName string `form:"ingress_name"`
+	Namespace   string `form:"namespace"`
+	Cluster     string `form:"cluster"`
+}
+
+type DeleteIngressDetailInput struct {
 	IngressName string `form:"ingress_name"`
 	Namespace   string `form:"namespace"`
 	Cluster     string `form:"cluster"`

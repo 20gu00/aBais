@@ -13,7 +13,7 @@ import (
 // 获取ingress详情
 func GetIngressDetail(ctx *gin.Context) {
 	// 1.参数
-	params := new(param.CommonIngressDetailInput)
+	params := new(param.GetIngressDetailInput)
 	if err := ctx.Bind(params); err != nil {
 		zap.L().Error("C-GetIngressDetail 绑定请求参数失败", zap.Error(err))
 		response.RespErr(ctx, response.CodeInvalidParam)

@@ -13,7 +13,7 @@ import (
 // 删除ingress
 func DeleteIngress(ctx *gin.Context) {
 	// 1.ingress
-	params := new(param.CommonIngressDetailInput)
+	params := new(param.DeleteIngressDetailInput)
 	// DELETE ShouldBindJSON
 	if err := ctx.ShouldBindJSON(params); err != nil {
 		zap.L().Error("C-DeleteIngress 绑定请求参数失败", zap.Error(err))

@@ -107,3 +107,5 @@ type secret struct{}
 
 
 
+limit 0,10 0-9
+yaml  获取:detail  接口:update 

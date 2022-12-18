@@ -71,6 +71,12 @@ const (
 	CodeGetSecretDetailErr
 	CodeDeleteSecretErr
 	CodeUpdateSecretErr
+
+	// pvc
+	CodeGetPvcErr
+	CodeGetPvcDetailErr
+	CodeDeletePvcErr
+	CodeUpdatePvcErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -140,6 +146,12 @@ var codeMsgMap = map[respCode]string{
 	CodeGetSecretDetailErr: "获取secret详情失败",
 	CodeDeleteSecretErr:    "删除secret失败",
 	CodeUpdateSecretErr:    "更新secret失败",
+
+	// pvc
+	CodeGetPvcErr:       "获取pvc列表失败",
+	CodeGetPvcDetailErr: "获取pvc详情失败",
+	CodeDeletePvcErr:    "删除pvc失败",
+	CodeUpdatePvcErr:    "更新pvc失败",
 }
 
 // 基本的返回描述msg
