@@ -29,7 +29,7 @@ func DeleteStatefulSet(ctx *gin.Context) {
 		return
 	}
 
-	err = statefulset.StatefulSet.DeleteStatefulSet(client, params.StatefulSetName, params.Namespace)
+	err = service.StatefulSet.DeleteStatefulSet(client, params.StatefulSetName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteStatefulSet 删除statefulset失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteStatefulsetErr)

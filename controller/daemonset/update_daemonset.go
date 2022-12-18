@@ -29,7 +29,7 @@ func UpdateDaemonSet(ctx *gin.Context) {
 		return
 	}
 
-	err = daemonset.DaemonSet.UpdateDaemonSet(client, params.Namespace, params.Content)
+	err = service.DaemonSet.UpdateDaemonSet(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateDaemonSet 更新daemonset失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetDaemonsetErr)

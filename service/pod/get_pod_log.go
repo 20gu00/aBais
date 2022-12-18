@@ -1,4 +1,4 @@
-package pod
+package service
 
 import (
 	"bytes"

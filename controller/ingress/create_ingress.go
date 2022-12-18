@@ -12,7 +12,7 @@ import (
 // 创建ingress
 func CreateIngress(ctx *gin.Context) {
 	var (
-		ingressCreate = new(ingress.IngressCreate)
+		ingressCreate = new(service.IngressCreate)
 		err           error
 	)
 
@@ -31,7 +31,7 @@ func CreateIngress(ctx *gin.Context) {
 		return
 	}
 
-	if err = ingress.Ingress.CreateIngress(client, ingressCreate); err != nil {
+	if err = service.Ingress.CreateIngress(client, ingressCreate); err != nil {
 		zap.L().Error("C-CreateIngress 创建ingress失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeCreateIngressErr)
 		return

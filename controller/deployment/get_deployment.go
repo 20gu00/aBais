@@ -28,7 +28,7 @@ func GetDeployments(ctx *gin.Context) {
 		return
 	}
 
-	data, err := deployment.Deployment.GetDeployments(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.Deployment.GetDeployments(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetDeployments 获取deployment列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeletePodErr)

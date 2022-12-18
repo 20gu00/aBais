@@ -29,7 +29,7 @@ func DeleteDaemonSet(ctx *gin.Context) {
 		return
 	}
 
-	err = daemonset.DaemonSet.DeleteDaemonSet(client, params.DaemonSetName, params.Namespace)
+	err = service.DaemonSet.DeleteDaemonSet(client, params.DaemonSetName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteDaemonSet 删除daemonset失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteDaemonsetErr)

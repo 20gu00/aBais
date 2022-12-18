@@ -1,4 +1,4 @@
-package pod
+package service
 
 import "k8s.io/client-go/kubernetes"
 

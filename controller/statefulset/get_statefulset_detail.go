@@ -27,7 +27,7 @@ func GetStatefulSetDetail(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	data, err := statefulset.StatefulSet.GetStatefulSetDetail(client, params.StatefulSetName, params.Namespace)
+	data, err := service.StatefulSet.GetStatefulSetDetail(client, params.StatefulSetName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetStatefulSetDetail 获取statefulset列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetStatefulsetDetailErr)

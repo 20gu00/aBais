@@ -29,7 +29,7 @@ func UpdateConfigMap(ctx *gin.Context) {
 		return
 	}
 
-	err = cm.ConfigMap.UpdateConfigMap(client, params.Namespace, params.Content)
+	err = service.ConfigMap.UpdateConfigMap(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateConfigMap 更新cm失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateCmErr)

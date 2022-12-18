@@ -31,7 +31,7 @@ func GetPodNumPerNs(ctx *gin.Context) {
 		return
 	}
 
-	data, err := pod.Pod.GetPodNumPerNs(client)
+	data, err := service.Pod.GetPodNumPerNs(client)
 	if err != nil {
 		zap.L().Error("C-GetPodNumPerNp 根据namespace获取pod数目失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetNumByNsErr)

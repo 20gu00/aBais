@@ -28,7 +28,7 @@ func GetConfigMapDetail(ctx *gin.Context) {
 		return
 	}
 
-	data, err := cm.ConfigMap.GetConfigMapDetail(client, params.ConfigMapName, params.Namespace)
+	data, err := service.ConfigMap.GetConfigMapDetail(client, params.ConfigMapName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetConfigMapDetail 获取cm详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetCmDetailErr)

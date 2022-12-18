@@ -29,7 +29,7 @@ func UpdateIngress(ctx *gin.Context) {
 		return
 	}
 
-	err = ingress.Ingress.UpdateIngress(client, params.Namespace, params.Content)
+	err = service.Ingress.UpdateIngress(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateIngress 更新ingress详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateIngressErr)

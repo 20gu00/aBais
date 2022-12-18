@@ -31,7 +31,7 @@ func GetDeploymentDetail(ctx *gin.Context) {
 		return
 	}
 
-	data, err := deployment.Deployment.GetDeploymentDetail(client, params.DeploymentName, params.Namespace)
+	data, err := service.Deployment.GetDeploymentDetail(client, params.DeploymentName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetDeploymentsDetail 获取deployment详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetDeploymentDetailErr)

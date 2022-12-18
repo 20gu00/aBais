@@ -29,7 +29,7 @@ func UpdateSecret(ctx *gin.Context) {
 		return
 	}
 
-	err = secret.Secret.UpdateSecret(client, params.Namespace, params.Content)
+	err = service.Secret.UpdateSecret(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateSecret 创建service失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateSecretErr)

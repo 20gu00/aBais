@@ -30,7 +30,7 @@ func UpdateDeployment(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	err = deployment.Deployment.UpdateDeployment(client, params.Namespace, params.Content)
+	err = service.Deployment.UpdateDeployment(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateDeployment 更新deployment失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateDeploymentErr)

@@ -1,4 +1,4 @@
-package statefulset
+package service
 
 import (
 	"context"

@@ -29,7 +29,7 @@ func GetPodContainer(ctx *gin.Context) {
 		return
 	}
 
-	data, err := pod.Pod.GetPodContainer(client, params.PodName, params.Namespace)
+	data, err := service.Pod.GetPodContainer(client, params.PodName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetPodContainer 获取pod中的container", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPodContainerErr)

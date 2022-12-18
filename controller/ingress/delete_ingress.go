@@ -29,7 +29,7 @@ func DeleteIngress(ctx *gin.Context) {
 		return
 	}
 
-	err = ingress.Ingress.DeleteIngress(client, params.IngressName, params.Namespace)
+	err = service.Ingress.DeleteIngress(client, params.IngressName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteIngress 删除ingress失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteIngressErr)

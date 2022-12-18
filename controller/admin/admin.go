@@ -3,7 +3,7 @@ package admin
 import (
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/admin"
-	"github.com/20gu00/aBais/service/admin"
+	service "github.com/20gu00/aBais/service/admin"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -20,7 +20,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	err := admin.Login(params.UserName, params.Password)
+	err := service.Login(params.UserName, params.Password)
 	if err != nil {
 		response.RespInternalErr(ctx, response.CodeServerIntervalErr)
 		return

@@ -29,7 +29,7 @@ func RestartDeployment(ctx *gin.Context) {
 		return
 	}
 
-	err = deployment.Deployment.RestartDeployment(client, params.DeploymentName, params.Namespace)
+	err = service.Deployment.RestartDeployment(client, params.DeploymentName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-RestartDeployment 重启deployment失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeRestartDeploymentErr)

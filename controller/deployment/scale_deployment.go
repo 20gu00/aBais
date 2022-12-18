@@ -30,7 +30,7 @@ func ScaleDeployment(ctx *gin.Context) {
 		return
 	}
 
-	data, err := deployment.Deployment.ScaleDeployment(client, params.DeploymentName, params.Namespace, params.ScaleNum)
+	data, err := service.Deployment.ScaleDeployment(client, params.DeploymentName, params.Namespace, params.ScaleNum)
 	if err != nil {
 		zap.L().Error("C-ScaleDeployment 调整deployment副本数目失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeScaleDeploymentErr)

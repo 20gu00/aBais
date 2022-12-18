@@ -4,8 +4,7 @@ import (
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/cm"
-	"github.com/20gu00/aBais/service/cm"
-
+	service "github.com/20gu00/aBais/service/cm"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -29,7 +28,7 @@ func DeleteConfigMap(ctx *gin.Context) {
 		return
 	}
 
-	err = cm.ConfigMap.DeleteConfigMap(client, params.ConfigMapName, params.Namespace)
+	err = service.ConfigMap.DeleteConfigMap(client, params.ConfigMapName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteConfigMap 删除cm失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteCmErr)

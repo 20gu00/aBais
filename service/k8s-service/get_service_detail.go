@@ -1,4 +1,4 @@
-package k8sSvc
+package service
 
 import (
 	"context"

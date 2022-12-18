@@ -27,7 +27,7 @@ func GetStatefulSets(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	data, err := statefulset.StatefulSet.GetStatefulSets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.StatefulSet.GetStatefulSets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetStatefulSets 获取statefulset列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetStatefulsetErr)

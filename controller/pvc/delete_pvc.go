@@ -4,8 +4,7 @@ import (
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/pvc"
-	"github.com/20gu00/aBais/service/pvc"
-
+	service "github.com/20gu00/aBais/service/pvc"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -29,7 +28,7 @@ func DeletePvc(ctx *gin.Context) {
 		return
 	}
 
-	err = pvc.Pvc.DeletePvc(client, params.PvcName, params.Namespace)
+	err = service.Pvc.DeletePvc(client, params.PvcName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeletePvc 删除pvc失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPvcErr)

@@ -28,7 +28,7 @@ func GetSecrets(ctx *gin.Context) {
 		return
 	}
 
-	data, err := secret.Secret.GetSecrets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.Secret.GetSecrets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetSecrets 创建service失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetSecretErr)

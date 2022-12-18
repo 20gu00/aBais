@@ -28,7 +28,7 @@ func GetPodDetail(ctx *gin.Context) {
 		return
 	}
 
-	data, err := pod.Pod.GetPodDetail(client, params.PodName, params.Namespace)
+	data, err := service.Pod.GetPodDetail(client, params.PodName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetPodDetail 获取pod详情信息失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPodDetailErr)

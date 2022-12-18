@@ -28,7 +28,7 @@ func GetPvcs(ctx *gin.Context) {
 		return
 	}
 
-	data, err := pvc.Pvc.GetPvcs(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.Pvc.GetPvcs(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetPvcs 获取pvc详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPvcErr)

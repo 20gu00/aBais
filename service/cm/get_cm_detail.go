@@ -1,4 +1,4 @@
-package cm
+package service
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-package secret
+package service
 
 import (
 	"context"
@@ -16,8 +16,7 @@ func (s *secret) UpdateSecret(client *kubernetes.Clientset, namespace, content s
 
 	err = json.Unmarshal([]byte(content), secret)
 	if err != nil {
-		zap.L().Error("S-UpdateSecret 反序列化失败", zap.Error(err)
-		err.Error()))
+		zap.L().Error("S-UpdateSecret 反序列化失败", zap.Error(err))
 		return errors.New("反序列化失败, " + err.Error())
 	}
 

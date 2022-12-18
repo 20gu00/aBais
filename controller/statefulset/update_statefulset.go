@@ -29,7 +29,7 @@ func UpdateStatefulSet(ctx *gin.Context) {
 		return
 	}
 
-	err = statefulset.StatefulSet.UpdateStatefulSet(client, params.Namespace, params.Content)
+	err = service.StatefulSet.UpdateStatefulSet(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdateStatefulSet 更新statefulset失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateStatefulsetErr)

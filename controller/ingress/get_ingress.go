@@ -28,7 +28,7 @@ func GetIngresses(ctx *gin.Context) {
 		return
 	}
 
-	data, err := ingress.Ingress.GetIngresses(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.Ingress.GetIngresses(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetIngresses 获取ingress列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetIngressErr)

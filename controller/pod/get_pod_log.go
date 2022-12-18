@@ -29,7 +29,7 @@ func GetPodLog(ctx *gin.Context) {
 	}
 
 	// string类型,前端在处理
-	data, err := pod.Pod.GetPodLog(client, params.ContainerName, params.PodName, params.Namespace)
+	data, err := service.Pod.GetPodLog(client, params.ContainerName, params.PodName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetPodLog 获取pod容器日志失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodePodContainerLogErr)

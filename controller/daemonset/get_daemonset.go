@@ -27,7 +27,7 @@ func GetDaemonSets(ctx *gin.Context) {
 		return
 	}
 
-	data, err := daemonset.DaemonSet.GetDaemonSets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.DaemonSet.GetDaemonSets(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetDaemonSets 获取daemonset失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdateDaemonsetErr)

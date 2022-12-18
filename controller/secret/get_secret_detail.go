@@ -27,7 +27,7 @@ func GetSecretDetail(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	data, err := secret.Secret.GetSecretDetail(client, params.SecretName, params.Namespace)
+	data, err := service.Secret.GetSecretDetail(client, params.SecretName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetSecretDetail 创建service失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetSecretDetailErr)

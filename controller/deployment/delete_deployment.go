@@ -29,7 +29,7 @@ func DeleteDeployment(ctx *gin.Context) {
 		return
 	}
 
-	err = deployment.Deployment.DeleteDeployment(client, params.DeploymentName, params.Namespace)
+	err = service.Deployment.DeleteDeployment(client, params.DeploymentName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteDeployment 删除deployment失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteDeploymentErr)

@@ -1,4 +1,4 @@
-package daemonset
+package service
 
 import (
 	"context"

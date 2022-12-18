@@ -8,6 +8,7 @@ import (
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/ingress"
 	"github.com/20gu00/aBais/controller/pod"
+	"github.com/20gu00/aBais/controller/pv"
 	"github.com/20gu00/aBais/controller/pvc"
 	"github.com/20gu00/aBais/controller/secret"
 	"github.com/20gu00/aBais/controller/service"
@@ -94,5 +95,10 @@ func SetupRouter(r *gin.Engine) {
 		GET("/pvcs", pvc.GetPvcs).
 		GET("/pvc/detail", pvc.GetPvcDetail).
 		DELETE("/pvc/delete", pvc.DeletePvc).
-		PUT("/pvc/update", pvc.UpdatePvc)
+		PUT("/pvc/update", pvc.UpdatePvc).
+
+		// pv
+		GET("/api/k8s/pvs", pv.GetPvs).
+		GET("/api/k8s/pv/detail", pv.GetPvDetail).
+		DELETE("/api/k8s/pv/del", pv.DeletePv)
 }

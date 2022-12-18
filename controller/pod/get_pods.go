@@ -29,7 +29,7 @@ func GetPods(ctx *gin.Context) {
 		return
 	}
 	// 获取pods
-	data, err := pod.Pod.GetPods(client, params.FilterName, params.Namespace, params.Limit, params.Page)
+	data, err := service.Pod.GetPods(client, params.FilterName, params.Namespace, params.Limit, params.Page)
 	if err != nil {
 		zap.L().Error("C-GetPods 获取pod列表失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetPodListErr)

@@ -29,7 +29,7 @@ func UpdatePvc(ctx *gin.Context) {
 		return
 	}
 
-	err = pvc.Pvc.UpdatePvc(client, params.Namespace, params.Content)
+	err = service.Pvc.UpdatePvc(client, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdatePvc 更新pvc详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdatePvcErr)

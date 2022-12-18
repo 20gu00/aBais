@@ -30,7 +30,7 @@ func DeletePod(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	err = pod.Pod.DeletePod(client, params.PodName, params.Namespace)
+	err = service.Pod.DeletePod(client, params.PodName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeletePod 删除pod失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeletePodErr)

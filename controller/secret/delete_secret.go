@@ -4,8 +4,7 @@ import (
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/secret"
-	"github.com/20gu00/aBais/service/secret"
-
+	service "github.com/20gu00/aBais/service/secret"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 )
@@ -29,7 +28,7 @@ func DeleteSecret(ctx *gin.Context) {
 		return
 	}
 
-	err = secret.Secret.DeleteSecret(client, params.SecretName, params.Namespace)
+	err = service.Secret.DeleteSecret(client, params.SecretName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-DeleteSecret 删除secret失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteSecretErr)

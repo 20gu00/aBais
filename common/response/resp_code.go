@@ -77,6 +77,11 @@ const (
 	CodeGetPvcDetailErr
 	CodeDeletePvcErr
 	CodeUpdatePvcErr
+
+	// pv
+	CodeGetPvErr
+	CodeGetPvDetailErr
+	CodeDeletePvErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -152,6 +157,11 @@ var codeMsgMap = map[respCode]string{
 	CodeGetPvcDetailErr: "获取pvc详情失败",
 	CodeDeletePvcErr:    "删除pvc失败",
 	CodeUpdatePvcErr:    "更新pvc失败",
+
+	// pv
+	CodeGetPvErr:       "获取pv列表失败",
+	CodeGetPvDetailErr: "获取pv详情失败",
+	CodeDeletePvErr:    "删除pv失败",
 }
 
 // 基本的返回描述msg

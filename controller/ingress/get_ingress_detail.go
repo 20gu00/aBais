@@ -28,7 +28,7 @@ func GetIngressDetail(ctx *gin.Context) {
 		return
 	}
 
-	data, err := ingress.Ingress.GetIngresstDetail(client, params.IngressName, params.Namespace)
+	data, err := service.Ingress.GetIngresstDetail(client, params.IngressName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetIngressDetail 获取ingress详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetIngressDetailErr)

@@ -27,7 +27,7 @@ func UpdatePod(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	err = pod.Pod.UpdatePod(client, params.PodName, params.Namespace, params.Content)
+	err = service.Pod.UpdatePod(client, params.PodName, params.Namespace, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdatePod 更新pod失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeUpdatePodErr)

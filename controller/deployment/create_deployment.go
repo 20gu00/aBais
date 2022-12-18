@@ -12,7 +12,7 @@ import (
 // 创建deployment
 func CreateDeployment(ctx *gin.Context) {
 	var (
-		deployCreate = new(deployment.DeployCreate)
+		deployCreate = new(service.DeployCreate)
 		err          error
 	)
 
@@ -28,7 +28,7 @@ func CreateDeployment(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	if err = deployment.Deployment.CreateDeployment(client, deployCreate); err != nil {
+	if err = service.Deployment.CreateDeployment(client, deployCreate); err != nil {
 		zap.L().Error("C-CreateDeployment 创建deployment失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteDeploymentErr)
 		return

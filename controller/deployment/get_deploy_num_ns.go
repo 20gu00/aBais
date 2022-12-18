@@ -26,7 +26,7 @@ func GetDeployNumPerNs(ctx *gin.Context) {
 		response.RespInternalErr(ctx, response.CodeGetK8sClientErr)
 		return
 	}
-	data, err := deployment.Deployment.GetDeployNumPerNs(client)
+	data, err := service.Deployment.GetDeployNumPerNs(client)
 	if err != nil {
 		zap.L().Error("C-GetDeployNumPerNs 根据ns获取deployment失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetDeploymentPerNsErr)
