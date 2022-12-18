@@ -97,3 +97,13 @@ json字符串
 
 
 form和json tag都可以
+
+// 大写,实例化 暴露方法(不用在外部调用初始化方法来实例化对象)
+var Secret secret
+
+// 小写,不给支持挎包调用  使用的时候就不用实例化,直接使用上面的实例化对象即可
+type secret struct{}
+
+
+
+

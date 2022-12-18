@@ -65,6 +65,12 @@ const (
 	CodeGetCmDetailErr
 	CodeDeleteCmErr
 	CodeUpdateCmErr
+
+	// secret
+	CodeGetSecretErr
+	CodeGetSecretDetailErr
+	CodeDeleteSecretErr
+	CodeUpdateSecretErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -128,6 +134,12 @@ var codeMsgMap = map[respCode]string{
 	CodeGetCmDetailErr: "获取cm详情失败",
 	CodeDeleteCmErr:    "删除cm失败",
 	CodeUpdateCmErr:    "更新cm失败",
+
+	// secret
+	CodeGetSecretErr:       "获取secret失败",
+	CodeGetSecretDetailErr: "获取secret详情失败",
+	CodeDeleteSecretErr:    "删除secret失败",
+	CodeUpdateSecretErr:    "更新secret失败",
 }
 
 // 基本的返回描述msg

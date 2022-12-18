@@ -8,6 +8,7 @@ import (
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/ingress"
 	"github.com/20gu00/aBais/controller/pod"
+	"github.com/20gu00/aBais/controller/secret"
 	"github.com/20gu00/aBais/controller/service"
 	"github.com/20gu00/aBais/controller/statefulset"
 
@@ -80,6 +81,11 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/configmaps", cm.GetConfigMaps).
 		GET("/api/k8s/configmap/detail", cm.GetConfigMapDetail).
 		DELETE("/api/k8s/configmap/del", cm.DeleteConfigMap).
-		PUT("/api/k8s/configmap/update", cm.UpdateConfigMap)
+		PUT("/api/k8s/configmap/update", cm.UpdateConfigMap).
 
+		// secret
+		GET("/api/k8s/secrets", secret.GetSecrets).
+		GET("/api/k8s/secret/detail", secret.GetSecretDetail).
+		DELETE("/api/k8s/secret/del", secret.DeleteSecret).
+		PUT("/api/k8s/secret/update", secret.UpdateSecret)
 }
