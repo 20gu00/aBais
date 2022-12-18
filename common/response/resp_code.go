@@ -59,6 +59,12 @@ const (
 	CodeDeleteIngressErr
 	CodeUpdateIngressErr
 	CodeCreateIngressErr
+
+	// configmap
+	CodeGetCmErr
+	CodeGetCmDetailErr
+	CodeDeleteCmErr
+	CodeUpdateCmErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -116,6 +122,12 @@ var codeMsgMap = map[respCode]string{
 	CodeDeleteIngressErr:    "删除ingress失败",
 	CodeUpdateIngressErr:    "更新ingress失败",
 	CodeCreateIngressErr:    "创建ingress失败",
+
+	// configmap
+	CodeGetCmErr:       "获取cm失败",
+	CodeGetCmDetailErr: "获取cm详情失败",
+	CodeDeleteCmErr:    "删除cm失败",
+	CodeUpdateCmErr:    "更新cm失败",
 }
 
 // 基本的返回描述msg

@@ -3,8 +3,10 @@ package router
 import (
 	"github.com/20gu00/aBais/common/response"
 	"github.com/20gu00/aBais/controller/admin"
+	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
+	"github.com/20gu00/aBais/controller/ingress"
 	"github.com/20gu00/aBais/controller/pod"
 	"github.com/20gu00/aBais/controller/service"
 	"github.com/20gu00/aBais/controller/statefulset"
@@ -72,5 +74,12 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/ingress/detail", ingress.GetIngressDetail).
 		DELETE("/api/k8s/ingress/del", ingress.DeleteIngress).
 		PUT("/api/k8s/ingress/update", ingress.UpdateIngress).
-		POST("/api/k8s/ingress/create", ingress.CreateIngress)
+		POST("/api/k8s/ingress/create", ingress.CreateIngress).
+
+		// configmap
+		GET("/api/k8s/configmaps", cm.GetConfigMaps).
+		GET("/api/k8s/configmap/detail", cm.GetConfigMapDetail).
+		DELETE("/api/k8s/configmap/del", cm.DeleteConfigMap).
+		PUT("/api/k8s/configmap/update", cm.UpdateConfigMap)
+
 }
