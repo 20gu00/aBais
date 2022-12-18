@@ -26,7 +26,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	response.RespOK(ctx, response.CodeSuccess)
+	response.RespOK(ctx, "成功 login", response.CodeSuccess)
 }
 
 func Register(ctx *gin.Context) {

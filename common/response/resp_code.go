@@ -46,12 +46,19 @@ const (
 	CodeDeleteStatefulsetErr
 	CodeUpdateStatefulsetErr
 
-	//service
+	// service
 	CodeGetSvcErr
 	CodeGetSvcDetailErr
 	CodeUpdateSvcErr
 	CodeDeleteSvcErr
 	CodeCreateSvcErr
+
+	// ingress
+	CodeGetIngressErr
+	CodeGetIngressDetailErr
+	CodeDeleteIngressErr
+	CodeUpdateIngressErr
+	CodeCreateIngressErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -102,6 +109,13 @@ var codeMsgMap = map[respCode]string{
 	CodeUpdateSvcErr:    "更新svc失败",
 	CodeDeleteSvcErr:    "删除svc失败",
 	CodeCreateSvcErr:    "创建svc失败",
+
+	// ingress
+	CodeGetIngressErr:       "获取ingress失败",
+	CodeGetIngressDetailErr: "获取ingress详情失败",
+	CodeDeleteIngressErr:    "删除ingress失败",
+	CodeUpdateIngressErr:    "更新ingress失败",
+	CodeCreateIngressErr:    "创建ingress失败",
 }
 
 // 基本的返回描述msg

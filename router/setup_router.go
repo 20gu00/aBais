@@ -65,5 +65,12 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/service/detail", service.GetServiceDetail).
 		DELETE("/api/k8s/service/del", service.DeleteService).
 		PUT("/api/k8s/service/update", service.UpdateService).
-		POST("/api/k8s/service/create", service.CreateService)
+		POST("/api/k8s/service/create", service.CreateService).
+
+		// ingress
+		GET("/api/k8s/ingresses", ingress.GetIngresses).
+		GET("/api/k8s/ingress/detail", ingress.GetIngressDetail).
+		DELETE("/api/k8s/ingress/del", ingress.DeleteIngress).
+		PUT("/api/k8s/ingress/update", ingress.UpdateIngress).
+		POST("/api/k8s/ingress/create", ingress.CreateIngress)
 }

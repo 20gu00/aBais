@@ -91,3 +91,9 @@ type Interface interface {
 
 
 json字符串
+
+
+
+
+
+form和json tag都可以
