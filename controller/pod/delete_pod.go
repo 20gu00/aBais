@@ -1,8 +1,6 @@
 package pod
 
 import (
-	"net/http"
-
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/pod"
@@ -34,10 +32,6 @@ func DeletePod(ctx *gin.Context) {
 	if err != nil {
 		zap.L().Error("C-DeletePod 删除pod失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeletePodErr)
-		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"msg":  err.Error(),
-			"data": nil,
-		})
 		return
 	}
 

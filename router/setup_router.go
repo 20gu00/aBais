@@ -7,6 +7,7 @@ import (
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/ingress"
+	"github.com/20gu00/aBais/controller/node"
 	"github.com/20gu00/aBais/controller/pod"
 	"github.com/20gu00/aBais/controller/pv"
 	"github.com/20gu00/aBais/controller/pvc"
@@ -98,7 +99,11 @@ func SetupRouter(r *gin.Engine) {
 		PUT("/pvc/update", pvc.UpdatePvc).
 
 		// pv
-		GET("/api/k8s/pvs", pv.GetPvs).
-		GET("/api/k8s/pv/detail", pv.GetPvDetail).
-		DELETE("/api/k8s/pv/del", pv.DeletePv)
+		GET("/pvs", pv.GetPvs).
+		GET("/pv/detail", pv.GetPvDetail).
+		DELETE("/pv/del", pv.DeletePv).
+
+		// node
+		GET("/nodes", node.GetNodes).
+		GET("/node/detail", node.GetNodeDetail)
 }

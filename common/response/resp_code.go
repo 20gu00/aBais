@@ -16,7 +16,7 @@ const (
 
 	CodeGetK8sClientErr // 2008
 
-	//pod
+	// pod
 	CodeGetPodListErr // 2009
 	CodeGetPodDetailErr
 	CodeDeletePodErr
@@ -82,6 +82,10 @@ const (
 	CodeGetPvErr
 	CodeGetPvDetailErr
 	CodeDeletePvErr
+
+	// node
+	CodeGetNodeErr
+	CodeGetNodeDetailErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -162,6 +166,10 @@ var codeMsgMap = map[respCode]string{
 	CodeGetPvErr:       "获取pv列表失败",
 	CodeGetPvDetailErr: "获取pv详情失败",
 	CodeDeletePvErr:    "删除pv失败",
+
+	// node
+	CodeGetNodeErr:       "获取node失败",
+	CodeGetNodeDetailErr: "获取node详情失败",
 }
 
 // 基本的返回描述msg
