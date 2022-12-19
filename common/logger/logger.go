@@ -46,7 +46,8 @@ func InitLogger(cfg *config.LogConfig, mode string) (err error) {
 		fmt.Println("程序配置的模式不正确")
 	}
 
-	logger = zap.New(core, zap.AddCaller())
+	// 调用的函数
+	logger = zap.New(core, zap.AddCaller()) // ide
 
 	// 全局变量使用不方便,可以替换zap的全局变量logger
 	zap.ReplaceGlobals(logger)
@@ -57,8 +58,8 @@ func InitLogger(cfg *config.LogConfig, mode string) (err error) {
 }
 
 func getEncoder() zapcore.Encoder {
-	encoderConfig := zap.NewProductionEncoderConfig()
-	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
+	encoderConfig := zap.NewDevelopmentEncoderConfig()
+	encoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder //2022-12-19T20:46:40.256+0800
 	encoderConfig.TimeKey = "time"
 	encoderConfig.EncodeLevel = zapcore.CapitalLevelEncoder
 	encoderConfig.EncodeDuration = zapcore.SecondsDurationEncoder

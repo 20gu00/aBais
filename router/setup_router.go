@@ -1,7 +1,6 @@
 package router
 
 import (
-	"github.com/20gu00/aBais/common/response"
 	"github.com/20gu00/aBais/controller/admin"
 	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/daemonset"
@@ -19,11 +18,6 @@ import (
 )
 
 func SetupRouter(r *gin.Engine) {
-	// ping
-	r.GET("/ping", func(ctx *gin.Context) {
-		response.RespOK(ctx, "ping测试成功", nil)
-	})
-
 	apiV1 := r.Group("/api/v1")
 
 	// 后台admin

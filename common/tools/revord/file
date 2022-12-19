@@ -108,4 +108,12 @@ type secret struct{}
 
 
 limit 0,10 0-9
-yaml  获取:detail  接口:update 
+yaml  获取:detail  接口:update
+
+bind(shouldBind)检查方法和内容类型以自动选择绑定引擎，根据“内容类型”标头使用不同的绑定，例如：
+“application/json”-->json绑定
+“application/xml”-->xml绑定
+如果Content-Type==“application/JSON”使用JSON或XML作为JSON输入，它将请求的主体解析为JSON。它将json有效载荷解码为指定为指针的结构。如果输入无效，它会写入一个400错误，并在响应中设置Content-Type标头“text/plain”。
+
+
+form  from-data
