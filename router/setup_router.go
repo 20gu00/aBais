@@ -6,6 +6,7 @@ import (
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/ingress"
+	"github.com/20gu00/aBais/controller/namespace"
 	"github.com/20gu00/aBais/controller/node"
 	"github.com/20gu00/aBais/controller/pod"
 	"github.com/20gu00/aBais/controller/pv"
@@ -95,9 +96,14 @@ func SetupRouter(r *gin.Engine) {
 		// pv
 		GET("/pvs", pv.GetPvs).
 		GET("/pv/detail", pv.GetPvDetail).
-		DELETE("/pv/del", pv.DeletePv).
+		DELETE("/pv/delete", pv.DeletePv).
 
 		// node
 		GET("/nodes", node.GetNodes).
-		GET("/node/detail", node.GetNodeDetail)
+		GET("/node/detail", node.GetNodeDetail).
+
+		// namespace
+		GET("/namespaces", namespace.GetNamespaces).
+		GET("/namespace/detail", namespace.GetNamespaceDetail).
+		DELETE("/namespace/delete", namespace.DeleteNamespace)
 }

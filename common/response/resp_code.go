@@ -86,6 +86,11 @@ const (
 	// node
 	CodeGetNodeErr
 	CodeGetNodeDetailErr
+
+	// ns
+	CodeGetNsErr
+	CodeGetNsDetailErr
+	CodeDeleteNsErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -170,6 +175,11 @@ var codeMsgMap = map[respCode]string{
 	// node
 	CodeGetNodeErr:       "获取node失败",
 	CodeGetNodeDetailErr: "获取node详情失败",
+
+	// ns
+	CodeGetNsErr:       "获取ns失败",
+	CodeGetNsDetailErr: "获取ns详情失败",
+	CodeDeleteNsErr:    "删除ns失败",
 }
 
 // 基本的返回描述msg
