@@ -6,7 +6,7 @@ read_timeout: 20
 write_timeout: 20
 max_header: 20
 mode: "dev"  # dev prod
-
+grace_time: 10  #优雅关闭的时间,秒
 
 # kubeconfig路径(多集群)
 # Kubeconfigs = `{"Cluster-1":"/root/.kube/config","Cluster-2":"/Users/adoo/.kube/config"}`

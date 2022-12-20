@@ -19,6 +19,7 @@ type AppConfig struct {
 	AdminUser     string `mapstructure:"AdminUser"`
 	AdminPassword string `mapstructure:"AdminPwd"`
 	Mode          string `mapstructure:"mode"`
+	GraceTime     int    `mapstructure:"grace_time"`
 
 	PodLogTailLine int  `mapstructure:"PodLogTailLine"`
 	LogMode        bool `mapstructure:"LogMode"`
