@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/20gu00/aBais/controller/admin"
 	allResources "github.com/20gu00/aBais/controller/all-resources"
+	"github.com/20gu00/aBais/controller/cluster"
 	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
@@ -111,11 +112,13 @@ func SetupRouter(r *gin.Engine) {
 		DELETE("/namespace/delete", namespace.DeleteNamespace).
 
 		// events
-		GET("/api/k8s/events", event.GetEventList).
+		GET("/events", event.GetEventList).
 
 		// 所有资源的数量
-		GET("/api/k8s/allresource", allResources.GetAllResourceNum)
+		GET("/allresource", allResources.GetAllResourceNum).
 
+		// cluster
+		GET("/clusters", cluster.GetClusters)
 	// job
 
 	// cronjob
