@@ -60,8 +60,8 @@ func (p *pod) CreatePod(client *kubernetes.Clientset, data *PodCreateParam) (err
 	}
 	_, err = client.CoreV1().Pods(data.Namespace).Create(context.TODO(), pod, metav1.CreateOptions{})
 	if err != nil {
-		zap.L().Error("C-CreatePod CreatePod, ", zap.Error(err))
-		return errors.New("CreatePod, " + err.Error())
+		zap.L().Error("C-CreatePod 创建pod失败", zap.Error(err))
+		return errors.New("创建pod失败, " + err.Error())
 	}
 
 	return nil
