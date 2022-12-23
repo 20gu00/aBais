@@ -148,3 +148,36 @@ go的字符串不能用''
 		service.Event.WatchEventTask("TST-1")
 	}()
 
+代码层直接处理跨域请求，不需要前面再加一层nginx处理，解决前后端域名不同、IP不同甚至端口不同导致的跨域报错。
+
+也可以是有后端生成token返回给前端,前端使用token来请求
+
+验证请求的合法性，前端只有在登录状态下才会生成token，请求时将token放入Header中，后端接收的请求时，先由该中
+间件验证token是否合法，合法时才放行，继续执行业务函数的逻辑处理。
+
+
+通过 client-go 提供的方法，实现通过网页进入 kubernetes pod 的终端操作。
+
+client-go remotecommand
+websocket
+xterm.js
+
+remotecommand
+k8s.io/client-go/tools/remotecommand kubernetes client-go 提供的 remotecommand 包，提供了方法
+与集群中的容器建立长连接，并设置容器的 stdin，stdout 等。
+remotecommand 包提供基于 SPDY 协议的 Executor interface，进行和 pod 终端的流的传输。初始化一个
+Executor 很简单，只需要调用 remotecommand 的 NewSPDYExecutor 并传入对应参数。
+Executor 的 Stream 方法，会建立一个流传输的连接，直到服务端和调用端一端关闭连接，才会停止传输。常用的做法
+是定义一个如下 PtyHandler 的 interface，然后使用你想用的客户端实现该 interface 对应的Read(p []byte)
+(int, error) 和Write(p []byte) (int, error) 方法即可，调用 Stream 方法时，只要将 StreamOptions 的
+Stdin Stdout 都设置为 ptyHandler，Executor 就会通过你定义的 write 和 read 方法来传输数据。
+
+websocket
+github.com/gorilla/websocket 是 go 的一个 websocket 实现，提供了全面的 websocket 相关的方法，这里
+使用它来实现上面所说的PtyHandler 接口。
+首先定义一个 TerminalSession 类，该类包含一个 *websocket.Conn ，通过 websocket 连接实现PtyHandler
+接口的读写方法，Next 方法在 remotecommand 执行过程中会被调用。
+
+xterm.js
+前端页面使用xterm.js进行模拟terminal展示，只要 javascript 监听 Terminal 对象的对应事件及 websocket
+连接的事件，进行对应的页面展示和消息推送就可以了。

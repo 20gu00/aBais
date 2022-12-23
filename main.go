@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"fmt"
+	service "github.com/20gu00/aBais/service/terminal"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -32,10 +34,24 @@ func main() {
 	// 处理event,监听event并写入数据库
 	common.EventWatch()
 
+	// websocket
+	wsHandler := http.NewServeMux()
+	wsHandler.HandleFunc("/ws", service.Terminal.WsHandler)
+	ws := &http.Server{
+		Addr:    config.Config.WSAddr,
+		Handler: wsHandler,
+	}
+	go func() {
+		if err := ws.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			log.Fatalf("websocket server listen: %s\n", err)
+		}
+	}()
+	fmt.Println("[Info] websocket server port ", strings.Split(config.Config.WSAddr, ":")[1])
+
 	// server
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			zap.L().Fatal("listen: %s\n", zap.Error(err))
+			zap.L().Fatal("http server listen: %s\n", zap.Error(err))
 		}
 	}()
 	fmt.Println("[Info] server port ", strings.Split(config.Config.Addr, ":")[1])
