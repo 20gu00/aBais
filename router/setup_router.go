@@ -114,5 +114,9 @@ func SetupRouter(r *gin.Engine) {
 		GET("/api/k8s/events", event.GetEventList).
 
 		// 所有资源的数量
-		GET("/api/k8s/allres", allResources.GetAllResourceNum)
+		GET("/api/k8s/allresource", allResources.GetAllResourceNum)
+
+	// job
+
+	// cronjob
 }
