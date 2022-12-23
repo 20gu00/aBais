@@ -2,9 +2,11 @@ package router
 
 import (
 	"github.com/20gu00/aBais/controller/admin"
+	allResources "github.com/20gu00/aBais/controller/all-resources"
 	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
+	"github.com/20gu00/aBais/controller/event"
 	"github.com/20gu00/aBais/controller/ingress"
 	"github.com/20gu00/aBais/controller/namespace"
 	"github.com/20gu00/aBais/controller/node"
@@ -106,5 +108,11 @@ func SetupRouter(r *gin.Engine) {
 		// namespace
 		GET("/namespaces", namespace.GetNamespaces).
 		GET("/namespace/detail", namespace.GetNamespaceDetail).
-		DELETE("/namespace/delete", namespace.DeleteNamespace)
+		DELETE("/namespace/delete", namespace.DeleteNamespace).
+
+		// events
+		GET("/api/k8s/events", event.GetEventList).
+
+		// 所有资源的数量
+		GET("/api/k8s/allres", allResources.GetAllResourceNum)
 }

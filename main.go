@@ -11,6 +11,7 @@ import (
 
 	"github.com/20gu00/aBais/common/config"
 	initDo "github.com/20gu00/aBais/common/init-do"
+	common "github.com/20gu00/aBais/common/watch-event"
 	"github.com/20gu00/aBais/dao/db"
 
 	"go.uber.org/zap"
@@ -28,6 +29,10 @@ func main() {
 		MaxHeaderBytes: 1 << config.Config.MaxHeader, // 1的xx次方
 	}
 
+	// 处理event,监听event并写入数据库
+	common.EventWatch()
+
+	// server
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 			zap.L().Fatal("listen: %s\n", zap.Error(err))

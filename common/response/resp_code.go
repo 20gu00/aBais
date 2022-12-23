@@ -92,6 +92,12 @@ const (
 	CodeGetNsErr
 	CodeGetNsDetailErr
 	CodeDeleteNsErr
+
+	// event
+	CodeListEventErr
+
+	// all resource
+	CodeGetAllResourceNumErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -182,6 +188,10 @@ var codeMsgMap = map[respCode]string{
 	CodeGetNsErr:       "获取ns失败",
 	CodeGetNsDetailErr: "获取ns详情失败",
 	CodeDeleteNsErr:    "删除ns失败",
+
+	// event
+	CodeListEventErr:         "获取event列表失败",
+	CodeGetAllResourceNumErr: "获取所有资源的数量失败",
 }
 
 // 基本的返回描述msg

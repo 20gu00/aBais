@@ -69,6 +69,7 @@ func ConfigRead(configFile string) error {
 		}
 	}
 
+	// 讲配置写入Config
 	if err := viper.Unmarshal(Config); err != nil {
 		fmt.Println("将配置信息添加进结构体操作失败", err)
 		return err

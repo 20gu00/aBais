@@ -22,6 +22,7 @@ type PodCreateParam struct {
 	RequestCpu    string            `json:"request_cpu"`
 	RequestMemory string            `json:"request_memory"`
 	ContainerPort string            `json:"container_port"`
+	Cluster       string            `json:"cluster"`
 }
 
 func (p *pod) CreatePod(client *kubernetes.Clientset, data *PodCreateParam) (err error) {

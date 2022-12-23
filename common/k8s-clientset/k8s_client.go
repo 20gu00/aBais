@@ -33,6 +33,7 @@ func (k *k8s) InitK8s() {
 	k.ClientMap = map[string]*kubernetes.Clientset{}
 
 	// 将集群的配置文件路径信息反序列化到kubeMap string->map
+	// map[Cluster-1:/root/.kube/config Cluster-2:/root/.kube/config]
 	if err := json.Unmarshal([]byte(config.Config.KubeConfigs), &k.KubeConfMap); err != nil {
 		panic(fmt.Sprintf("获取kubeConfig配置文件路径信息,Kubeconfigs反序列化失败 %v\n", err))
 	}

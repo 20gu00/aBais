@@ -119,3 +119,32 @@ bind(shouldBind)检查方法和内容类型以自动选择绑定引擎，根据�
 form  from-data
 新版本默认优先使用vendor,如果有,再go module本地缓存
 go build x --mod=mod
+
+SetMaxOpenConns
+默认情况下，连接池的最大数量是没有限制的。一般来说，连接数越多，访问数据库的性能越高。但是系统资源不是无限
+的，数据库的并发能力也不是无限的。因此为了减少系统和数据库崩溃的风险，可以给并发连接数设置一个上限，这个数值
+一般不超过进程的最大文件句柄打开数，不超过数据库服务自身支持的并发连接数，比如1000。
+SetMaxIdleConns
+理论上maxIdleConns连接的上限越高，也即允许在连接池中的空闲连接最大值越大，可以有效减少连接创建和销毁的次
+数，提高程序的性能。但是连接对象也是占用内存资源的，而且如果空闲连接越多，存在于连接池内的时间可能越长。 连接
+在经过一段时间后有可能会变得不可用，而这时连接还在连接池内没有回收的话，后续被征用的时候就会出问题。一般建议
+maxIdleConns的值为MaxOpenConns的1/2，仅供参考。
+SetConnMaxLifetime
+设置一个连接被使用的最长时间，即过了一段时间后会被强制回收，理论上这可以有效减少不可用连接出现的概率。当数据
+库方面也设置了连接的超时时间时，这个值应当不超过数据库的超时参数值。
+工厂模式只看结果,多数用于操作隐私属性,想要使用隐私属性,就必须按照指定的方法
+go的字符串不能用''
+// 初始化
+	kubeMap := map[string]string{}
+	json.Unmarshal([]byte(config.Config.KubeConfigs), kubeMap)
+	// 先是kubeMap 左值仅一次创建
+	for idx, _ := range kubeMap {
+		// 直接用值
+		go func() {
+			service.Event.WatchEventTask(idx)
+		}()
+	}
+	go func() {
+		service.Event.WatchEventTask("TST-1")
+	}()
+
