@@ -35,7 +35,7 @@ func SetupRouter(r *gin.Engine) {
 		GET("/pod/detail", pod.GetPodDetail).
 		DELETE("/pod/delete", pod.DeletePod).
 		PUT("/pod/update", pod.UpdatePod).
-		GET("/pod/container", pod.GetPodContainer).
+		GET("/pod/containers", pod.GetPodContainer).
 		GET("/pod/log", pod.GetPodLog).
 		GET("/pod/numns", pod.GetPodNumPerNs).
 

@@ -60,9 +60,10 @@ func (d *deployment) CreateDeployment(client *kubernetes.Clientset, data *Deploy
 							Image: data.Image,
 							Ports: []corev1.ContainerPort{
 								{
-									Name:          "http",
-									Protocol:      corev1.ProtocolTCP,
-									ContainerPort: 80,
+									Name:     "http",
+									Protocol: corev1.ProtocolTCP,
+									//ContainerPort: 80,
+									ContainerPort: data.ContainerPort,
 								},
 							},
 						},
@@ -121,6 +122,7 @@ func (d *deployment) CreateDeployment(client *kubernetes.Clientset, data *Deploy
 		}
 
 		// 定义容器的limit和request资源
+		// limit和request相同则具有高优先级
 		deployment.Spec.Template.Spec.Containers[0].Resources.Limits = map[corev1.ResourceName]resource.Quantity{
 			corev1.ResourceCPU:    resource.MustParse(data.Cpu),
 			corev1.ResourceMemory: resource.MustParse(data.Memory),

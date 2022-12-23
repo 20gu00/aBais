@@ -117,3 +117,5 @@ bind(shouldBind)检查方法和内容类型以自动选择绑定引擎，根据�
 
 
 form  from-data
+新版本默认优先使用vendor,如果有,再go module本地缓存
+go build x --mod=mod

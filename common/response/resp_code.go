@@ -24,6 +24,7 @@ const (
 	CodePodContainerLogErr
 	CodeGetNumByNsErr
 	CodeGetPodContainerErr
+	CodeCreatePodErr
 
 	//deployment
 	CodeGetDeploymentListrErr
@@ -113,6 +114,7 @@ var codeMsgMap = map[respCode]string{
 	CodePodContainerLogErr: "获取pod中的容器日志失败",
 	CodeGetNumByNsErr:      "根据ns获取pod数目失败",
 	CodeGetPodContainerErr: "获取pod中的容器失败",
+	CodeCreatePodErr:       "创建pod失败",
 
 	// deployment
 	CodeGetDeploymentListrErr:  "获取deployment列表失败",
