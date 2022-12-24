@@ -181,3 +181,18 @@ github.com/gorilla/websocket 是 go 的一个 websocket 实现，提供了全面
 xterm.js
 前端页面使用xterm.js进行模拟terminal展示，只要 javascript 监听 Terminal 对象的对应事件及 websocket
 连接的事件，进行对应的页面展示和消息推送就可以了。
+
+
+
+
+
+
+
+模拟pod执行命令
+func(cli *podClient) Exec(cmd []string,namespace,pod,container string){
+    // 建立请求
+    // 需要自己构造restclient
+    // exec是post请求
+    // GVK GVR
+    req:=cli.clientset.CoreV1().RESTClient().Post().Resource("pods")
+}

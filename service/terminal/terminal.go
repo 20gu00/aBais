@@ -4,7 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"time"
+
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
+
 	"github.com/gorilla/websocket"
 	"go.uber.org/zap"
 	v1 "k8s.io/api/core/v1"
@@ -12,8 +16,6 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/remotecommand"
-	"net/http"
-	"time"
 )
 
 var Terminal terminal
@@ -31,6 +33,7 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 	containerName := r.Form.Get("container_name")
 	cluster := r.Form.Get("cluster")
 	zap.L().Info(fmt.Sprintf("exec pod: %s, container: %s, namespace: %s, cluster: %s\n", podName, containerName, namespace, cluster))
+	// clientSet
 	client, err := k8sClient.K8s.GetK8sClient(cluster)
 	if err != nil {
 		return
@@ -44,7 +47,8 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// new一个TerminalSession类型的pty实例
+	// new一个TerminalSession类型的pty实例 tty
+	// websocket的输入和输出
 	pty, err := NewTerminalSession(w, r, nil)
 	if err != nil {
 		zap.L().Error("获取pty失败", zap.Error(err))
@@ -60,38 +64,53 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 	// 初始化pod所在的corev1资源组
 	// PodExecOptions struct 包括Container stdout stdout  Command 等结构
 	// scheme.ParameterCodec 应该是pod 的GVK （GroupVersion & Kind）之类的
-	// URL:
-	// https://192.168.2.100:6443/api/v1/namespaces/default/pods/nginx-wf2-778d88d7c-7rmsk/exec?command=%2Fbin%2Fbash&container=nginx-wf2&stderr=true&stdin=true&stdout=true&tty=true
-	// 最基本的客户端 restclient
+	// URL: https://192.168.2.100:6443/api/v1/namespaces/default/pods/nginx-wf2-778d88d7c-7rmsk/exec?command=%2Fbin%2Fbash&container=nginx-wf2&stderr=true&stdin=true&stdout=true&tty=true
+	// 最基本的客户端 restclient 操作pod 请求apiserver
+	// 建立个客户端执行exec kubectl exec
+	// pod执行命令的方式,这就需要pod namespace container和实际执行cmd
+	// 建立请求 需要自己构造restclient
+	// exec是post请求
+	// GVK GVR 远程执行的命令传递到pod container的终端上运行
+
 	req := client.CoreV1().RESTClient().Post().
 		Resource("pods").
 		Name(podName).
 		Namespace(namespace).
+		// 子资源exec
 		SubResource("exec").
-		// 命令的参数
+		// 命令的参数 标准输入输出 错误输出,同时也开启终端,最后拿到命令执行返回的数据
 		VersionedParams(&v1.PodExecOptions{
-			Container: containerName,
-			Command:   []string{"/bin/bash"},
+			Container: containerName,         // 要执行哪一个容器
+			Command:   []string{"/bin/bash"}, // bash命令,也需要配置了开启终端才行
 			Stdin:     true,
 			Stdout:    true,
 			Stderr:    true,
 			TTY:       true,
 		}, scheme.ParameterCodec)
 
-	// remotecommand提供方法与集群建立长连接,并设置stdin stdout 提供基于 SPDY 协议的 Executor interface，进行和 pod 终端的流的传输
+	// remotecommand提供方法与集群建立长连接,与pod中的容器建立个长链接进行交互,并设置stdin stdout 提供基于 SPDY 协议的 Executor interface，进行和 pod 终端的流的传输
 	// 主要实现了http 转 SPDY 添加X-Stream-Protocol-Version相关header 并发送请求
+	// kubeconfig 请求方法 请求的url
+	// exec是POST请求
+	// 发送这个请求给apiserver,类似kubectl exec和apiserver交互,remotecommand包创建一个executor和apiserver建立长连接
 	executor, err := remotecommand.NewSPDYExecutor(conf, "POST", req.URL())
 	if err != nil {
 		return
 	}
-	// 建立链接之后从请求的sream中发送、读取数据
+
+	// 远程连接 处理和container终端之间的数据读取和写入
+	// 基于spdy协议的executor 建立链接之后从请求的stream中发送、读取数据
+
+	// executor和apiserver建立了长连接后,使用流的方式来进行数据的传递,apiserver和kubelet交互,即表明要将命令传递给某个容器,kubelet和底下的容器运行时交互比如docker也就是内置的dockershim交互,让他提供某个容器的流终端,从而可以让excutor流传递数据
 	// Stream
 	err = executor.StreamWithContext(context.Background(), remotecommand.StreamOptions{
-		Stdin:             pty,
+		// reader
+		Stdin: pty,
+		// writer  可以输出到缓冲区或者从缓冲区读取,也可以用websocket来处理
 		Stdout:            pty,
 		Stderr:            pty,
-		TerminalSizeQueue: pty,
-		Tty:               true,
+		TerminalSizeQueue: pty,  // 终端的伸缩 实现了Next()方法,得到下一次的终端的尺寸
+		Tty:               true, // 需要终端
 	})
 
 	if err != nil {

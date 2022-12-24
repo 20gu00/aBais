@@ -37,5 +37,6 @@ func GetPodLog(ctx *gin.Context) {
 	}
 
 	// 3.resp
+	// 日志 string
 	response.RespOK(ctx, "获取Pod中容器日志成功", data)
 }
