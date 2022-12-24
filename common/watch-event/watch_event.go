@@ -11,7 +11,7 @@ import (
 func EventWatch() {
 	// 初始化
 	kubeMap := map[string]string{}
-	if err := json.Unmarshal([]byte(config.Config.KubeConfigs), kubeMap); err != nil {
+	if err := json.Unmarshal([]byte(config.Config.KubeConfigs), &kubeMap); err != nil {
 		zap.L().Error("eventWatch 序列化kubeconfig路径信息失败", zap.Error(err))
 	}
 	// 先是kubeMap 左值仅一次创建
