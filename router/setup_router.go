@@ -118,14 +118,7 @@ func SetupRouter(r *gin.Engine) {
 		GET("/allresource", allResources.GetAllResourceNum).
 
 		// cluster
-		GET("/clusters", cluster.GetClusters).
-
-		// workflow
-		GET("/api/k8s/workflows", workflow.GetList).
-		GET("/api/k8s/workflow/detail", workflow.GetById).
-		POST("/api/k8s/workflow/create", workflow.Create).
-		DELETE("/api/k8s/workflow/del", workflow.DelById)
+		GET("/clusters", cluster.GetClusters)
 	// job
-
 	// cronjob
 }
