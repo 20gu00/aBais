@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/20gu00/aBais/common/jwt-token"
 	"net/http"
 
@@ -11,7 +12,9 @@ import (
 func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 对登录接口放行
-		if len(c.Request.URL.String()) >= 10 && c.Request.URL.String()[0:10] == "/api/login" {
+		loginReqUrl := "/api/v1/login"
+		fmt.Println(len(loginReqUrl))
+		if len(c.Request.URL.String()) >= len(loginReqUrl) && c.Request.URL.String()[0:13] == loginUrl {
 			c.Next()
 		} else {
 			// 携带Token有三种方式 1.放在请求头(header中自定义key value  token:xxx 2.放在请求体 3.放在URI
@@ -30,7 +33,7 @@ func JWTAuth() gin.HandlerFunc {
 			// parseToken 解析token包含的信息
 			claims, err := jwt.JWTToken.ParseToken(token)
 			if err != nil {
-				//token延期错误
+				// token延期错误
 				if err.Error() == "TokenExpired" {
 					c.JSON(http.StatusBadRequest, gin.H{
 						"msg":  "授权已过期",
@@ -39,7 +42,7 @@ func JWTAuth() gin.HandlerFunc {
 					c.Abort()
 					return
 				}
-				//其他解析错误
+				//  其他解析错误
 				c.JSON(http.StatusBadRequest, gin.H{
 					"msg":  err.Error(),
 					"data": nil,
