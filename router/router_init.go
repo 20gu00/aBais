@@ -18,8 +18,8 @@ func InitRouter() *gin.Engine {
 	r.Use(
 		logger.GinLogger(),
 		logger.GinRecovery(true),
-		middleware.JWTAuth(),
 		middleware.Cors(),
+		middleware.JWTAuth(),
 	)
 
 	SetupRouter(r)
