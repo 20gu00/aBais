@@ -14,7 +14,7 @@ func JWTAuth() gin.HandlerFunc {
 		// 对登录接口放行
 		loginReqUrl := "/api/v1/login"
 		fmt.Println(len(loginReqUrl))
-		if len(c.Request.URL.String()) >= len(loginReqUrl) && c.Request.URL.String()[0:13] == loginUrl {
+		if len(c.Request.URL.String()) >= len(loginReqUrl) && c.Request.URL.String()[0:13] == loginReqUrl {
 			c.Next()
 		} else {
 			// 携带Token有三种方式 1.放在请求头(header中自定义key value  token:xxx 2.放在请求体 3.放在URI
