@@ -26,7 +26,7 @@ func SetupRouter(r *gin.Engine) {
 
 	// 后台admin
 	apiV1.
-		GET("/admin", admin.Login).
+		POST("/login", admin.Login).
 		POST("/register", admin.Register)
 	// GET("/info",controller.AdminInfo)
 
