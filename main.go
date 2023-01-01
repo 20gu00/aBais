@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	service "github.com/20gu00/aBais/service/terminal"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -43,7 +42,7 @@ func main() {
 	}
 	go func() {
 		if err := ws.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-			log.Fatalf("websocket server listen: %s\n", err)
+			zap.L().Fatal("websocket server listen: %s\n", zap.Error(err))
 		}
 	}()
 	fmt.Println("[Info] websocket server port ", strings.Split(config.Config.WSAddr, ":")[1])

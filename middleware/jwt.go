@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"github.com/20gu00/aBais/common/jwt-token"
 	"net/http"
 
@@ -13,7 +12,6 @@ func JWTAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// 对登录接口放行
 		loginReqUrl := "/api/v1/login"
-		fmt.Println(len(loginReqUrl))
 		if len(c.Request.URL.String()) >= len(loginReqUrl) && c.Request.URL.String()[0:13] == loginReqUrl {
 			c.Next()
 		} else {
