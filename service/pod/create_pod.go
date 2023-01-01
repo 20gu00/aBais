@@ -27,7 +27,6 @@ type PodCreateParam struct {
 
 func (p *pod) CreatePod(client *kubernetes.Clientset, data *PodCreateParam) (err error) {
 	// 后端提供了ns的接口,前段只提供存在的ns选项
-
 	pod := &corev1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,

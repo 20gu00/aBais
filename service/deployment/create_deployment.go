@@ -31,7 +31,6 @@ type DeployCreate struct {
 func (d *deployment) CreateDeployment(client *kubernetes.Clientset, data *DeployCreate) (err error) {
 	deployment := &appsv1.Deployment{
 		// GVK
-
 		// ObjectMeta  metadata
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,
@@ -39,7 +38,7 @@ func (d *deployment) CreateDeployment(client *kubernetes.Clientset, data *Deploy
 			Labels:    data.Label,
 		},
 
-		// Spec
+		// Spec   deployment spec
 		Spec: appsv1.DeploymentSpec{
 			Replicas: &data.Replicas,
 			Selector: &metav1.LabelSelector{

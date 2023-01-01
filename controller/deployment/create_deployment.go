@@ -22,6 +22,7 @@ func CreateDeployment(ctx *gin.Context) {
 		response.RespErr(ctx, response.CodeInvalidParam)
 		return
 	}
+	//指定的cluster的client
 	client, err := k8sClient.K8s.GetK8sClient(deployCreate.Cluster)
 	if err != nil {
 		zap.L().Error("C-CreateDeployment 获取k8s的client失败", zap.Error(err))
