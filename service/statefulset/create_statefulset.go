@@ -35,7 +35,7 @@ type StatefulsetCreate struct {
 	MountPath       string            `json:"mount_path"`
 	VolumeClaimName string            `json:"volume_claim_name"`
 	AccessMode      string            `json:"access_mode"`
-	storage         string            `json:"storage"`
+	Storage         string            `json:"storage"`
 }
 
 func (d *statefulSet) CreateDaemonset(client *kubernetes.Clientset, data *StatefulsetCreate) (err error) {
@@ -76,7 +76,7 @@ func (d *statefulSet) CreateDaemonset(client *kubernetes.Clientset, data *Statef
 
 func CreateVolumeClaim(data *StatefulsetCreate) []corev1.PersistentVolumeClaim {
 	vcNames := strings.Split(data.VolumeClaimName, ",")
-	storages := strings.Split(data.storage, ",")
+	storages := strings.Split(data.Storage, ",")
 	accessmodes := strings.Split(data.AccessMode, "/")
 	//这里共用一个accessmode
 	corev1AccessMode := []corev1.PersistentVolumeAccessMode{}
@@ -92,7 +92,7 @@ func CreateVolumeClaim(data *StatefulsetCreate) []corev1.PersistentVolumeClaim {
 		}
 
 		pvcItem.Spec.AccessModes = corev1AccessMode
-		if idx < len(storages) && data.storage != "" {
+		if idx < len(storages) && data.Storage != "" {
 			pvcItem.Spec.Resources.Requests = map[corev1.ResourceName]resource.Quantity{
 				corev1.ResourceStorage: resource.MustParse(storages[idx]),
 			}
