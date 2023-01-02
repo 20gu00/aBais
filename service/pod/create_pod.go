@@ -77,16 +77,16 @@ func CreateContainer(data *PodCreateParam) []corev1.Container {
 		c := corev1.Container{
 			Name:  data.Name + imgs[i] + "-" + strconv.Itoa(i),
 			Image: imgs[i],
-			Ports: []corev1.ContainerPort{
-				{
-					// 容器端口和容器这里是一对一
-					Name: imgs[i] + "-port-1", // "http",
-					// 均可tcp...
-					Protocol: corev1.ProtocolTCP,
-					// containerPort--targetPort(pod)
-					ContainerPort: ports[i],
-				},
-			},
+			//Ports: []corev1.ContainerPort{
+			//	{
+			//		// 容器端口和容器这里是一对一
+			//		Name: imgs[i] + "-port-1", // "http",
+			//		// 均可tcp...
+			//		Protocol: corev1.ProtocolTCP,
+			//		// containerPort--targetPort(pod)
+			//		ContainerPort: ports[i],
+			//	},
+			//},
 			//Resources: corev1.ResourceRequirements{
 			//	Limits: map[corev1.ResourceName]resource.Quantity{
 			//		corev1.ResourceCPU:    resource.MustParse(limitCpus[i]),
@@ -99,6 +99,19 @@ func CreateContainer(data *PodCreateParam) []corev1.Container {
 			//},
 		}
 		//有则设置没有则不设置
+		if i <= len(ports) && data.ContainerPort != "" {
+			c.Ports = []corev1.ContainerPort{
+				{
+					// 容器端口和容器这里是一对一
+					Name: imgs[i] + "-port-1", // "http",
+					// 均可tcp...
+					Protocol: corev1.ProtocolTCP,
+					// containerPort--targetPort(pod)
+					ContainerPort: ports[i],
+				},
+			}
+		}
+
 		if i < len(limitMems) && data.LimitMemory != "" {
 			c.Resources = corev1.ResourceRequirements{
 				Limits: map[corev1.ResourceName]resource.Quantity{corev1.ResourceMemory: resource.MustParse(limitMems[i])},
