@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
@@ -18,5 +19,10 @@ func (p *pvc) GetPvcDetail(client *kubernetes.Clientset, pvcName, namespace stri
 		return nil, errors.New("获取Pvc详情失败, " + err.Error())
 	}
 
+	pvc.ManagedFields = []metav1.ManagedFieldsEntry{}
+	pvc.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "PersistentVolumeClaim",
+		Version: "v1",
+	})
 	return pvc, nil
 }

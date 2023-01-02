@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
@@ -18,5 +19,10 @@ func (p *pv) GetPvDetail(client *kubernetes.Clientset, pvName string) (pv *corev
 		return nil, errors.New("获取Pv详情失败, " + err.Error())
 	}
 
+	pv.ManagedFields = []metav1.ManagedFieldsEntry{}
+	pv.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "PersistentVolume",
+		Version: "v1",
+	})
 	return pv, nil
 }

@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
@@ -18,5 +19,10 @@ func (n *node) GetNodeDetail(client *kubernetes.Clientset, nodeName string) (nod
 		return nil, errors.New("获取Node详情失败, " + err.Error())
 	}
 
+	node.ManagedFields = []metav1.ManagedFieldsEntry{}
+	node.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Node",
+		Version: "v1",
+	})
 	return node, nil
 }

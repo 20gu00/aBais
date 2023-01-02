@@ -6,6 +6,7 @@ import (
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/kubernetes"
 )
 
@@ -17,5 +18,10 @@ func (n *namespace) GetNamespaceDetail(client *kubernetes.Clientset, namespaceNa
 		return nil, errors.New("获取Namespace详情失败, " + err.Error())
 	}
 
+	namespace.ManagedFields = []metav1.ManagedFieldsEntry{}
+	namespace.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Namespace",
+		Version: "v1",
+	})
 	return namespace, nil
 }

@@ -6,6 +6,7 @@ import (
 	"go.uber.org/zap"
 	appsv1 "k8s.io/api/apps/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/kubernetes"
 )
 
@@ -17,5 +18,10 @@ func (d *deployment) GetDeploymentDetail(client *kubernetes.Clientset, deploymen
 		return nil, errors.New("获取Deployment详情失败, " + err.Error())
 	}
 
+	deployment.ManagedFields = []metav1.ManagedFieldsEntry{}
+	deployment.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Deployment",
+		Version: "apps/v1",
+	})
 	return deployment, nil
 }

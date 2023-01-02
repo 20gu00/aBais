@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	nwv1 "k8s.io/api/networking/v1"
@@ -18,5 +19,10 @@ func (i *ingress) GetIngresstDetail(client *kubernetes.Clientset, ingressName, n
 		return nil, errors.New("获取Ingress详情失败, " + err.Error())
 	}
 
+	ingress.ManagedFields = []metav1.ManagedFieldsEntry{}
+	ingress.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Ingress",
+		Version: "networking.k8s.io/v1",
+	})
 	return ingress, nil
 }

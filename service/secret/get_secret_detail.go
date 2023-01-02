@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
@@ -18,5 +19,10 @@ func (s *secret) GetSecretDetail(client *kubernetes.Clientset, secretName, names
 		return nil, errors.New("获取Secret详情失败, " + err.Error())
 	}
 
+	secret.ManagedFields = []metav1.ManagedFieldsEntry{}
+	secret.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Secret",
+		Version: "v1",
+	})
 	return secret, nil
 }

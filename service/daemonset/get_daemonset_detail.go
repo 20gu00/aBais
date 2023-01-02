@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	appsv1 "k8s.io/api/apps/v1"
@@ -18,5 +19,10 @@ func (d *daemonSet) GetDaemonSetDetail(client *kubernetes.Clientset, daemonSetNa
 		return nil, errors.New("获取DaemonSet详情失败, " + err.Error())
 	}
 
+	daemonSet.ManagedFields = []metav1.ManagedFieldsEntry{}
+	daemonSet.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "DaemonSet",
+		Version: "apps/v1",
+	})
 	return daemonSet, nil
 }

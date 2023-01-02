@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
@@ -18,5 +19,10 @@ func (s *k8sService) GetServicetDetail(client *kubernetes.Clientset, serviceName
 		return nil, errors.New("获取Service详情失败, " + err.Error())
 	}
 
+	service.ManagedFields = []metav1.ManagedFieldsEntry{}
+	service.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
+		Kind:    "Service",
+		Version: "v1",
+	})
 	return service, nil
 }
