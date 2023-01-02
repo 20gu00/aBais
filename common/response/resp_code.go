@@ -37,6 +37,7 @@ const (
 	CodeCreateDeploymentErr
 
 	// daemonset
+	CodeCreateDaemonsetErr
 	CodeGetDaemonsetErr
 	CodeGetDaemonsetDetailErr
 	CodeDeleteDaemonsetErr
@@ -47,6 +48,7 @@ const (
 	CodeGetStatefulsetDetailErr
 	CodeDeleteStatefulsetErr
 	CodeUpdateStatefulsetErr
+	CodeCreateStatefulsetErr
 
 	// service
 	CodeGetSvcErr
@@ -67,32 +69,38 @@ const (
 	CodeGetCmDetailErr
 	CodeDeleteCmErr
 	CodeUpdateCmErr
+	CodeCreateCmErr
 
 	// secret
 	CodeGetSecretErr
 	CodeGetSecretDetailErr
 	CodeDeleteSecretErr
 	CodeUpdateSecretErr
+	CodeCreateSecretErr
 
 	// pvc
 	CodeGetPvcErr
 	CodeGetPvcDetailErr
 	CodeDeletePvcErr
 	CodeUpdatePvcErr
+	CodeCreatePvcErr
 
 	// pv
 	CodeGetPvErr
 	CodeGetPvDetailErr
 	CodeDeletePvErr
+	CodeCreatePvErr
 
 	// node
 	CodeGetNodeErr
 	CodeGetNodeDetailErr
+	CodeCreateNodeErr
 
 	// ns
 	CodeGetNsErr
 	CodeGetNsDetailErr
 	CodeDeleteNsErr
+	CodeCreateNsErr
 
 	// event
 	CodeListEventErr
@@ -138,12 +146,14 @@ var codeMsgMap = map[respCode]string{
 	CodeGetDaemonsetDetailErr: "获取daemonset详情失败",
 	CodeDeleteDaemonsetErr:    "删除daemonset失败",
 	CodeUpdateDaemonsetErr:    "更新daemonset失败",
+	CodeCreateDaemonsetErr:    "创建daemonset失败",
 
 	// statefulset
 	CodeGetStatefulsetErr:       "获取statefulset列表失败",
 	CodeGetStatefulsetDetailErr: "获取statefulset详情失败",
 	CodeDeleteStatefulsetErr:    "删除statefulset失败",
 	CodeUpdateStatefulsetErr:    "更新statefulset失败",
+	CodeCreateStatefulsetErr:    "创建statefulset失败",
 
 	// service
 	CodeGetSvcErr:       "获取svc失败",
@@ -164,23 +174,27 @@ var codeMsgMap = map[respCode]string{
 	CodeGetCmDetailErr: "获取cm详情失败",
 	CodeDeleteCmErr:    "删除cm失败",
 	CodeUpdateCmErr:    "更新cm失败",
+	CodeCreateCmErr:    "创建cm失败",
 
 	// secret
 	CodeGetSecretErr:       "获取secret失败",
 	CodeGetSecretDetailErr: "获取secret详情失败",
 	CodeDeleteSecretErr:    "删除secret失败",
 	CodeUpdateSecretErr:    "更新secret失败",
+	CodeCreateSecretErr:    "创建secret失败",
 
 	// pvc
 	CodeGetPvcErr:       "获取pvc列表失败",
 	CodeGetPvcDetailErr: "获取pvc详情失败",
 	CodeDeletePvcErr:    "删除pvc失败",
 	CodeUpdatePvcErr:    "更新pvc失败",
+	CodeCreatePvcErr:    "创建pvc失败",
 
 	// pv
 	CodeGetPvErr:       "获取pv列表失败",
 	CodeGetPvDetailErr: "获取pv详情失败",
 	CodeDeletePvErr:    "删除pv失败",
+	CodeCreatePvErr:    "创建pv失败",
 
 	// node
 	CodeGetNodeErr:       "获取node失败",
@@ -190,6 +204,7 @@ var codeMsgMap = map[respCode]string{
 	CodeGetNsErr:       "获取ns失败",
 	CodeGetNsDetailErr: "获取ns详情失败",
 	CodeDeleteNsErr:    "删除ns失败",
+	CodeCreateNsErr:    "创建ns失败",
 
 	// event
 	CodeListEventErr:         "获取event列表失败",
