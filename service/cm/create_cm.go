@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"errors"
+
 	"go.uber.org/zap"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,7 +17,7 @@ type ConfigmapCreate struct {
 	Data      map[string]string `json:"data"`
 }
 
-func (d *configMap) CreateCm(client *kubernetes.Clientset, data *configmapCreate) (err error) {
+func (d *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate) (err error) {
 	cm := &corev1.ConfigMap{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,

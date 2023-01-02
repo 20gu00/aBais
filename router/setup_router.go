@@ -86,12 +86,14 @@ func SetupRouter(r *gin.Engine) {
 		GET("/configmap/detail", cm.GetConfigMapDetail).
 		DELETE("/configmap/del", cm.DeleteConfigMap).
 		PUT("/configmap/update", cm.UpdateConfigMap).
+		POST("/configmap/create", cm.CreateCm).
 
 		// secret
 		GET("/secrets", secret.GetSecrets).
 		GET("/secret/detail", secret.GetSecretDetail).
 		DELETE("/secret/delete", secret.DeleteSecret).
 		PUT("/secret/update", secret.UpdateSecret).
+		POST("/secret/create", secret.CreateSecret).
 
 		// pvc
 		GET("/pvcs", pvc.GetPvcs).
