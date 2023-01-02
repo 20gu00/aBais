@@ -58,12 +58,14 @@ func SetupRouter(r *gin.Engine) {
 		GET("/daemonset/detail", daemonset.GetDaemonSetDetail).
 		DELETE("/daemonset/delete", daemonset.DeleteDaemonSet).
 		PUT("/daemonset/update", daemonset.UpdateDaemonSet).
+		POST("daemonset/create", daemonset.CreateDaemonset).
 
 		// statefulset
 		GET("/statefulsets", statefulset.GetStatefulSets).
 		GET("/statefulset/detail", statefulset.GetStatefulSetDetail).
 		DELETE("/statefulset/delete", statefulset.DeleteStatefulSet).
 		PUT("/statefulset/update", statefulset.UpdateStatefulSet).
+		POST("/statefulset/create", statefulset.CreateStatefulset).
 
 		// service
 		GET("/services", service.GetServices).

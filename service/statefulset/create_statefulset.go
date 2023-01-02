@@ -56,7 +56,6 @@ func (d *statefulSet) CreateDaemonset(client *kubernetes.Clientset, data *Statef
 					Name:   data.Name,
 					Labels: data.PodLabel,
 				},
-
 				Spec: corev1.PodSpec{
 					Containers: CreateContainer(data),
 				},
@@ -78,21 +77,29 @@ func (d *statefulSet) CreateDaemonset(client *kubernetes.Clientset, data *Statef
 func CreateVolumeClaim(data *StatefulsetCreate) []corev1.PersistentVolumeClaim {
 	vcNames := strings.Split(data.VolumeClaimName, ",")
 	storages := strings.Split(data.storage, ",")
+	accessmodes := strings.Split(data.AccessMode, "/")
+	//这里共用一个accessmode
+	corev1AccessMode := []corev1.PersistentVolumeAccessMode{}
+	for i, val := range accessmodes {
+		corev1AccessMode[i] = corev1.PersistentVolumeAccessMode(val)
+	}
 	pvc := []corev1.PersistentVolumeClaim{}
 	for idx, vcName := range vcNames {
 		pvcItem := corev1.PersistentVolumeClaim{
 			ObjectMeta: metav1.ObjectMeta{
 				Name: vcName,
 			},
-			Spec: corev1.PersistentVolumeClaimSpec{
-				Resources: corev1.ResourceRequirements{
-					Requests: map[corev1.ResourceName]resource.Quantity{
-						corev1.ResourceStorage: resource.MustParse(storages[idx]),
-					},
-				},
-			},
 		}
+
+		pvcItem.Spec.AccessModes = corev1AccessMode
+		if idx < len(storages) && data.storage != "" {
+			pvcItem.Spec.Resources.Requests = map[corev1.ResourceName]resource.Quantity{
+				corev1.ResourceStorage: resource.MustParse(storages[idx]),
+			}
+		}
+		pvc = append(pvc, pvcItem)
 	}
+	return pvc
 }
 
 func CreateContainer(data *StatefulsetCreate) []corev1.Container {
@@ -116,6 +123,12 @@ func CreateContainer(data *StatefulsetCreate) []corev1.Container {
 		c := corev1.Container{
 			Name:  data.Name + imgs[i] + "-" + strconv.Itoa(i),
 			Image: imgs[i],
+			VolumeMounts: []corev1.VolumeMount{
+				{
+					Name:      data.Name,
+					MountPath: data.MountPath,
+				},
+			},
 		}
 
 		if i < len(ports) && data.ContainerPort != "" {
