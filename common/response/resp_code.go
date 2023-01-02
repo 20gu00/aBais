@@ -34,6 +34,7 @@ const (
 	CodeRestartDeploymentErr
 	CodeUpdateDeploymentErr
 	CodeGetDeploymentPerNsErr
+	CodeCreateDeploymentErr
 
 	// daemonset
 	CodeGetDaemonsetErr
@@ -130,6 +131,7 @@ var codeMsgMap = map[respCode]string{
 	CodeRestartDeploymentErr:   "重启deployment失败",
 	CodeUpdateDeploymentErr:    "更新deployment失败",
 	CodeGetDeploymentPerNsErr:  "根据ns获取deployment失败",
+	CodeCreateDeploymentErr:    "创建deployment失败",
 
 	// daemonset
 	CodeGetDaemonsetErr:       "获取daemonset失败",

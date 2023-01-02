@@ -31,7 +31,7 @@ func CreateDeployment(ctx *gin.Context) {
 	}
 	if err = service.Deployment.CreateDeployment(client, deployCreate); err != nil {
 		zap.L().Error("C-CreateDeployment 创建deployment失败", zap.Error(err))
-		response.RespInternalErr(ctx, response.CodeDeleteDeploymentErr)
+		response.RespInternalErr(ctx, response.CodeCreateDeploymentErr) //  前段可以使用
 		return
 	}
 

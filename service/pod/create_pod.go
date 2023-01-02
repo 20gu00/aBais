@@ -99,7 +99,7 @@ func CreateContainer(data *PodCreateParam) []corev1.Container {
 			//},
 		}
 		//有则设置没有则不设置
-		if i <= len(ports) && data.ContainerPort != "" {
+		if i < len(ports) && data.ContainerPort != "" {
 			c.Ports = []corev1.ContainerPort{
 				{
 					// 容器端口和容器这里是一对一
@@ -152,6 +152,8 @@ func CreateContainer(data *PodCreateParam) []corev1.Container {
 						},
 					},
 				},
+				//SuccessThreshold: ,
+				//FailureThreshold: ,
 				InitialDelaySeconds: 5,
 				TimeoutSeconds:      5,
 				PeriodSeconds:       5,
