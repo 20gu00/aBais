@@ -100,6 +100,7 @@ func SetupRouter(r *gin.Engine) {
 		GET("/pvc/detail", pvc.GetPvcDetail).
 		DELETE("/pvc/delete", pvc.DeletePvc).
 		PUT("/pvc/update", pvc.UpdatePvc).
+		POST("/pvc/create", pvc.CreatePvc).
 
 		// pv
 		GET("/pvs", pv.GetPvs).
