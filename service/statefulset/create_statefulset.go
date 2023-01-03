@@ -67,7 +67,7 @@ func (d *statefulSet) CreateDaemonset(client *kubernetes.Clientset, data *Statef
 
 	_, err = client.AppsV1().StatefulSets(data.Namespace).Create(context.TODO(), statefulset, metav1.CreateOptions{})
 	if err != nil {
-		zap.L().Error("C-CreateStatefulset 创建Statefulset失败, ", zap.Error(err))
+		zap.L().Error("S-CreateStatefulset 创建Statefulset失败, ", zap.Error(err))
 		return errors.New("创建Statefulset失败" + err.Error())
 	}
 
@@ -79,9 +79,10 @@ func CreateVolumeClaim(data *StatefulsetCreate) []corev1.PersistentVolumeClaim {
 	storages := strings.Split(data.Storage, ",")
 	accessmodes := strings.Split(data.AccessMode, "/")
 	//这里共用一个accessmode
-	corev1AccessMode := []corev1.PersistentVolumeAccessMode{}
-	for i, val := range accessmodes {
-		corev1AccessMode[i] = corev1.PersistentVolumeAccessMode(val)
+	corev1AccessMode := make([]corev1.PersistentVolumeAccessMode, 0)
+	for _, val := range accessmodes {
+		corev1AccessMode = append(corev1AccessMode, corev1.PersistentVolumeAccessMode(val))
+		//corev1AccessMode[i] = corev1.PersistentVolumeAccessMode(val)
 	}
 	pvc := []corev1.PersistentVolumeClaim{}
 	for idx, vcName := range vcNames {
@@ -90,7 +91,6 @@ func CreateVolumeClaim(data *StatefulsetCreate) []corev1.PersistentVolumeClaim {
 				Name: vcName,
 			},
 		}
-
 		pvcItem.Spec.AccessModes = corev1AccessMode
 		if idx < len(storages) && data.Storage != "" {
 			pvcItem.Spec.Resources.Requests = map[corev1.ResourceName]resource.Quantity{
