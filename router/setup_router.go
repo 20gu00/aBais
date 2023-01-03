@@ -116,6 +116,7 @@ func SetupRouter(r *gin.Engine) {
 		GET("/namespaces", namespace.GetNamespaces).
 		GET("/namespace/detail", namespace.GetNamespaceDetail).
 		DELETE("/namespace/delete", namespace.DeleteNamespace).
+		POST("/namespace/create", namespace.CreateNs).
 
 		// events
 		GET("/events", event.GetEventList).
