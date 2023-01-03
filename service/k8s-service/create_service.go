@@ -38,7 +38,7 @@ func (s *k8sService) CreateService(client *kubernetes.Clientset, data *ServiceCr
 				{
 					Name:     "http",
 					Port:     data.Port,
-					Protocol: "TCP",
+					Protocol: corev1.ProtocolTCP, //"TCP"
 					TargetPort: intstr.IntOrString{
 						Type:   0,
 						IntVal: data.ContainerPort,
@@ -48,7 +48,7 @@ func (s *k8sService) CreateService(client *kubernetes.Clientset, data *ServiceCr
 			Selector: data.Label,
 		},
 	}
-	// 默认ClusterIP,这里是判断NodePort,添加配置
+	// 默认ClusterIP,这里是判断NodePort,添加配置  空 零值
 	if data.NodePort != 0 && data.Type == "NodePort" {
 		service.Spec.Ports[0].NodePort = data.NodePort
 	}
