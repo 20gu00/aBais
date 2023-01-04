@@ -13,21 +13,21 @@ import (
 )
 
 type PvcCreate struct {
-	Name         string            `json:"name"`
-	Namespace    string            `json:"namespace"`
-	Cluster      string            `json:"cluster"`
-	Data         map[string]string `json:"data"`
-	StorageClass string            `json:"storage_class"`
-	VolumeMode   string            `json:"volume_mode"`
-	Storage      string            `json:"storage"`
-	AccessMode   string            `json:"access_mode"`
+	Name         string `json:"name"`
+	Namespace    string `json:"namespace"`
+	Cluster      string `json:"cluster"`
+	StorageClass string `json:"storage_class"`
+	VolumeMode   string `json:"volume_mode"`
+	Storage      string `json:"storage"`
+	AccessMode   string `json:"access_mode"`
 }
 
 func (p *pvc) CreatePvc(client *kubernetes.Clientset, data *PvcCreate) (err error) {
 	amsTemp := strings.Split(data.AccessMode, "/")
 	ams := []corev1.PersistentVolumeAccessMode{}
-	for idx, val := range amsTemp {
-		ams[idx] = corev1.PersistentVolumeAccessMode(val)
+	for _, val := range amsTemp {
+		ams = append(ams, corev1.PersistentVolumeAccessMode(val))
+		//ams[idx] = corev1.PersistentVolumeAccessMode(val)
 	}
 	pvc := &corev1.PersistentVolumeClaim{
 		ObjectMeta: metav1.ObjectMeta{
@@ -47,7 +47,7 @@ func (p *pvc) CreatePvc(client *kubernetes.Clientset, data *PvcCreate) (err erro
 
 	_, err = client.CoreV1().PersistentVolumeClaims(data.Namespace).Create(context.TODO(), pvc, metav1.CreateOptions{})
 	if err != nil {
-		zap.L().Error("C-CreatePvc 创建pvc失败, ", zap.Error(err))
+		zap.L().Error("S-CreatePvc 创建pvc失败, ", zap.Error(err))
 		return errors.New("创建pvc失败" + err.Error())
 	}
 
