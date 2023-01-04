@@ -16,10 +16,11 @@ type SecretCreate struct {
 	Cluster   string            `json:"cluster"`
 	Data      map[string]string `json:"data"`
 	Type      string            `json:"type"`
+	//Label     map[string]string `json:"label"`
 }
 
-func (d *secret) CreateSecret(client *kubernetes.Clientset, data *SecretCreate) (err error) {
-	dataTemp := map[string][]byte{}
+func (s *secret) CreateSecret(client *kubernetes.Clientset, data *SecretCreate) (err error) {
+	dataTemp := make(map[string][]byte) //map
 	for idx, val := range data.Data {
 		dataTemp[idx] = []byte(val)
 	}
@@ -27,6 +28,7 @@ func (d *secret) CreateSecret(client *kubernetes.Clientset, data *SecretCreate) 
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,
 			Namespace: data.Namespace,
+			//Labels:    data.Label,
 		},
 		Data: dataTemp,
 		Type: corev1.SecretType(data.Type),
@@ -34,7 +36,7 @@ func (d *secret) CreateSecret(client *kubernetes.Clientset, data *SecretCreate) 
 
 	_, err = client.CoreV1().Secrets(data.Namespace).Create(context.TODO(), secret, metav1.CreateOptions{})
 	if err != nil {
-		zap.L().Error("C-CreateSecret 创建Secret失败, ", zap.Error(err))
+		zap.L().Error("S-CreateSecret 创建Secret失败, ", zap.Error(err))
 		return errors.New("创建Secret失败" + err.Error())
 	}
 

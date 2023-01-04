@@ -15,6 +15,7 @@ type ConfigmapCreate struct {
 	Namespace string            `json:"namespace"`
 	Cluster   string            `json:"cluster"`
 	Data      map[string]string `json:"data"`
+	//Label     map[string]string `json:"label"`
 }
 
 func (c *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate) (err error) {
@@ -22,6 +23,7 @@ func (c *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,
 			Namespace: data.Namespace,
+			//Labels:    data.Label,
 		},
 		Data: data.Data,
 	}
