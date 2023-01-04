@@ -17,7 +17,7 @@ type ConfigmapCreate struct {
 	Data      map[string]string `json:"data"`
 }
 
-func (d *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate) (err error) {
+func (c *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate) (err error) {
 	cm := &corev1.ConfigMap{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      data.Name,
@@ -28,7 +28,7 @@ func (d *configMap) CreateCm(client *kubernetes.Clientset, data *ConfigmapCreate
 
 	_, err = client.CoreV1().ConfigMaps(data.Namespace).Create(context.TODO(), cm, metav1.CreateOptions{})
 	if err != nil {
-		zap.L().Error("C-CreateCm 创建ConfigMap失败, ", zap.Error(err))
+		zap.L().Error("S-CreateCm 创建ConfigMap失败, ", zap.Error(err))
 		return errors.New("创建ConfigMap失败" + err.Error())
 	}
 
