@@ -126,9 +126,10 @@ func SetupRouter(r *gin.Engine) {
 		GET("/allresource", allResources.GetAllResourceNum).
 
 		// cluster
-		GET("/clusters", cluster.GetClusters).
+		GET("/clusters", cluster.GetClusters)
 
-		//helm应用商店
+	//helm应用商店
+	apiV1.
 		GET("/helmstore/releases", HelmStore.ListReleases).
 		GET("/helmstore/release/detail", HelmStore.DetailRelease).
 		POST("/helmstore/release/install", HelmStore.InstallRelease).
@@ -141,4 +142,5 @@ func SetupRouter(r *gin.Engine) {
 		DELETE("/helmstore/chartfile/del", HelmStore.DeleteChartFile)
 	// job
 	// cronjob
+
 }
