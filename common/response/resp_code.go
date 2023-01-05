@@ -110,8 +110,19 @@ const (
 	// all resource
 	CodeGetAllResourceNumErr
 
-	//release
+	//helm
 	CodeListReleaseErr
+	CodeDetailReleaseErr
+	CodeInstallReleaseErr
+	CodeUninstallReleaseErr
+	CodeAddChartErr
+	CodeDeleteChartErr
+	CodeListChartErr
+	CodeDeleteReleaseErr
+	CodeUpdateChartErr
+	CodeDeleteChartFileErr
+	CodeUploadChartFileErr
+	CodeGetUploadMessageErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -216,7 +227,18 @@ var codeMsgMap = map[respCode]string{
 	CodeGetAllResourceNumErr: "获取所有资源的数量失败",
 
 	// release
-	CodeListReleaseErr: "获取release列表失败",
+	CodeListReleaseErr:      "获取release列表失败",
+	CodeDetailReleaseErr:    "获取release详情失败",
+	CodeInstallReleaseErr:   "安装release失败",
+	CodeDeleteReleaseErr:    "删除release失败",
+	CodeUninstallReleaseErr: "卸载release失败",
+	CodeAddChartErr:         "新建chart失败",
+	CodeDeleteChartErr:      "删除chart失败",
+	CodeListChartErr:        "获取chart列表失败",
+	CodeUpdateChartErr:      "更新chart失败",
+	CodeDeleteChartFileErr:  "删除chart file失败",
+	CodeUploadChartFileErr:  "上传chart file失败",
+	CodeGetUploadMessageErr: "获取上传信息失败",
 }
 
 // 基本的返回描述msg
