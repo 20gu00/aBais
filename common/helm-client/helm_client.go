@@ -50,10 +50,10 @@ func (h *helmConfig) Init() {
 }
 
 func (*helmConfig) GetAc(cluster, namespace string) (*action.Configuration, error) {
-	kubeconfig, ok := K8s.KubeConfMap[cluster]
+	kubeconfig, ok := k8sClient.K8s.KubeConfMap[cluster]
 	if !ok {
-		logger.Error("actionConfig初始化失败, cluster不存在")
-		return nil, errors.New("actionConfig初始化失败, cluster不存在")
+		zap.L().Error("action Config初始化失败, cluster不存在")
+		return nil, errors.New("action Config初始化失败, cluster不存在")
 	}
 	actionConfig := new(action.Configuration)
 	cf := &genericclioptions.ConfigFlags{
@@ -61,8 +61,8 @@ func (*helmConfig) GetAc(cluster, namespace string) (*action.Configuration, erro
 		Namespace:  &namespace,
 	}
 	if err := actionConfig.Init(cf, namespace, os.Getenv("HELM_DRIVER"), log.Printf); err != nil {
-		logger.Error("actionConfig初始化失败, %+v", err)
-		return nil, errors.New("actionConfig初始化失败, " + err.Error())
+		zap.L().Error("action Config初始化失败", zap.Error(err))
+		return nil, errors.New("action Config初始化失败, " + err.Error())
 	}
 	return actionConfig, nil
 }
