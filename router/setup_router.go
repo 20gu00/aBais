@@ -129,16 +129,16 @@ func SetupRouter(r *gin.Engine) {
 		GET("/clusters", cluster.GetClusters).
 
 		//helm应用商店
-		GET("/api/helmstore/releases", HelmStore.ListReleases).
-		GET("/api/helmstore/release/detail", HelmStore.DetailRelease).
-		POST("/api/helmstore/release/install", HelmStore.InstallRelease).
-		DELETE("/api/helmstore/release/uninstall", HelmStore.UninstallRelease).
-		GET("/api/helmstore/charts", HelmStore.ListCharts).
-		POST("/api/helmstore/chart/add", HelmStore.AddChart).
-		PUT("/api/helmstore/chart/update", HelmStore.UpdateChart).
+		GET("/helmstore/releases", HelmStore.ListReleases).
+		GET("/helmstore/release/detail", HelmStore.DetailRelease).
+		POST("/helmstore/release/install", HelmStore.InstallRelease).
+		DELETE("/helmstore/release/uninstall", HelmStore.UninstallRelease).
+		GET("/helmstore/charts", HelmStore.ListCharts).
+		POST("/helmstore/chart/add", HelmStore.AddChart).
+		PUT("/helmstore/chart/update", HelmStore.UpdateChart).
 		DELETE("/api/helmstore/chart/del", HelmStore.DeleteChart).
 		POST("/api/helmstore/chartfile/upload", HelmStore.UploadChartFile).
-		DELETE("/api/helmstore/chartfile/del", HelmStore.DeleteChartFile)
+		DELETE("/helmstore/chartfile/del", HelmStore.DeleteChartFile)
 	// job
 	// cronjob
 }
