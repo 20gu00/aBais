@@ -137,9 +137,9 @@ func SetupRouter(r *gin.Engine) {
 		GET("/helmstore/charts", HelmStore.ListCharts).
 		POST("/helmstore/chart/add", HelmStore.AddChart).
 		PUT("/helmstore/chart/update", HelmStore.UpdateChart).
-		DELETE("/api/helmstore/chart/del", HelmStore.DeleteChart).
-		POST("/api/helmstore/chartfile/upload", HelmStore.UploadChartFile).
-		DELETE("/helmstore/chartfile/del", HelmStore.DeleteChartFile)
+		DELETE("/helmstore/chart/delete", HelmStore.DeleteChart).
+		POST("/helmstore/chartfile/upload", HelmStore.UploadChartFile).
+		DELETE("/helmstore/chartfile/delete", HelmStore.DeleteChartFile)
 	// job
 	// cronjob
 

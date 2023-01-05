@@ -14,7 +14,7 @@ func (*helmStore) AddChart(chart *model.HelmChart) error {
 		return err
 	}
 	if has {
-		return errors.New("该数据已存在，请重新添加")
+		return errors.New("该chart已存在，请重新添加")
 	}
 	if err := dao.Chart.Add(chart); err != nil {
 		return err

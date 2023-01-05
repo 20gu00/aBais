@@ -21,6 +21,7 @@ func (*helmStore) InstallRelease(actionConfig *action.Configuration, release, ch
 	if splitChart[len(splitChart)-1] == "tgz" && !strings.Contains(chart, ":") {
 		chart = config.Config.UploadPath + "/" + chart
 	}
+
 	chartRequested, err := loader.Load(chart)
 	if err != nil {
 		zap.L().Error("加载chart文件失败" + err.Error())
