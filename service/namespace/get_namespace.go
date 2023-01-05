@@ -27,7 +27,7 @@ func (n *namespace) GetNamespaces(client *kubernetes.Clientset, filterName strin
 	namespaceList, err := client.CoreV1().Namespaces().List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		zap.L().Error("S-GetNamespaces 获取Namespace列表失败", zap.Error(err))
-		return nil, errors.New("获取Namespace列表失败, " + err.Error())
+		return nil, errors.New("获取Namespace列表失败" + err.Error())
 	}
 
 	// 将namespaceList中的namespace列表(Items)，放进dataselector对象中，进行排序

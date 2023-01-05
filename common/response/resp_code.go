@@ -16,6 +16,8 @@ const (
 
 	CodeGetK8sClientErr // 2008
 
+	CodeActionConfigErr
+
 	// pod
 	CodeGetPodListErr // 2009
 	CodeGetPodDetailErr
@@ -107,6 +109,9 @@ const (
 
 	// all resource
 	CodeGetAllResourceNumErr
+
+	//release
+	CodeListReleaseErr
 )
 
 var codeMsgMap = map[respCode]string{
@@ -120,7 +125,7 @@ var codeMsgMap = map[respCode]string{
 	CodeInvalidToken:      "无效的token",
 
 	CodeGetK8sClientErr: "获取操作k8s的client失败",
-
+	CodeActionConfigErr: "获取action的config失败",
 	//pod
 	CodeGetPodListErr:      "获取pod列表失败",
 	CodeGetPodDetailErr:    "获取pod详情失败",
@@ -209,6 +214,9 @@ var codeMsgMap = map[respCode]string{
 	// event
 	CodeListEventErr:         "获取event列表失败",
 	CodeGetAllResourceNumErr: "获取所有资源的数量失败",
+
+	// release
+	CodeListReleaseErr: "获取release列表失败",
 }
 
 // 基本的返回描述msg
