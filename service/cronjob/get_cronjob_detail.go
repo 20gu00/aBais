@@ -21,7 +21,7 @@ func (j *cronjob) GetCronJobDetail(client *kubernetes.Clientset, cronJobName, na
 
 	cronJob.ManagedFields = []metav1.ManagedFieldsEntry{}
 	cronJob.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{
-		Kind:    "Job",
+		Kind:    "CronJob",
 		Version: "batch/v1beta1",
 	})
 	return cronJob, nil

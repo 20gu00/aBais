@@ -28,7 +28,7 @@ func GetCronJobDetail(ctx *gin.Context) {
 
 	data, err := service.CronJob.GetCronJobDetail(client, params.CronJobName, params.Namespace)
 	if err != nil {
-		zap.L().Error("C-GetCronJobDetail 获取job详情失败", zap.Error(err))
+		zap.L().Error("C-GetCronJobDetail 获取cronjob详情失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeGetCronJobDetailErr)
 		return
 	}
