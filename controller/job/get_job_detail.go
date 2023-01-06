@@ -29,7 +29,7 @@ func GetJobDetail(ctx *gin.Context) {
 	data, err := service.Job.GetJobDetail(client, params.JobName, params.Namespace)
 	if err != nil {
 		zap.L().Error("C-GetJobDetail 获取job详情失败", zap.Error(err))
-		response.RespInternalErr(ctx, response.CodeGetJobErr)
+		response.RespInternalErr(ctx, response.CodeGetJobDetailErr)
 		return
 	}
 

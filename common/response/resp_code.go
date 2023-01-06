@@ -117,6 +117,13 @@ const (
 	CodeGetJobErr
 	CodeGetJobDetailErr
 
+	// cronJob
+	CodeCreateCronJobErr
+	CodeDeleteCronJobErr
+	CodeUpdateCronJobErr
+	CodeGetCronJobErr
+	CodeGetCronJobDetailErr
+
 	// helm
 	CodeListReleaseErr
 	CodeDetailReleaseErr
@@ -239,6 +246,13 @@ var codeMsgMap = map[respCode]string{
 	CodeUpdateJobErr:    "更新job错误",
 	CodeGetJobErr:       "获取job错误",
 	CodeGetJobDetailErr: "获取job详情错误",
+
+	// cronJob
+	CodeCreateCronJobErr:    "创建cronjob失败",
+	CodeDeleteCronJobErr:    "删除cronjob失败",
+	CodeUpdateCronJobErr:    "更新cronjob失败",
+	CodeGetCronJobErr:       "获取cronjob列表失败",
+	CodeGetCronJobDetailErr: "获取cronjob详情失败",
 
 	// release
 	CodeListReleaseErr:      "获取release列表失败",

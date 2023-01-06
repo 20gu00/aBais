@@ -5,6 +5,7 @@ import (
 	allResources "github.com/20gu00/aBais/controller/all-resources"
 	"github.com/20gu00/aBais/controller/cluster"
 	"github.com/20gu00/aBais/controller/cm"
+	"github.com/20gu00/aBais/controller/cronjob"
 	"github.com/20gu00/aBais/controller/daemonset"
 	"github.com/20gu00/aBais/controller/deployment"
 	"github.com/20gu00/aBais/controller/event"
@@ -130,13 +131,18 @@ func SetupRouter(r *gin.Engine) {
 		GET("/clusters", cluster.GetClusters).
 
 		// job
-		// cronjob
 		GET("/jobs", job.GetJobs).
 		GET("/job/detail", job.GetJobDetail).
 		DELETE("/job/delete", job.DeleteJob).
 		PUT("/job/update", job.UpdateJob).
-		POST("/job/create", job.CreateJob)
+		POST("/job/create", job.CreateJob).
 
+		// cronjob
+		GET("/cronjobs", cronjob.GetCronJobs).
+		GET("/cronjob/detail", cronjob.GetCronJobDetail).
+		DELETE("/cronjob/delete", cronjob.DeleteCronJob).
+		PUT("/cronjob/update", cronjob.UpdateCronJob).
+		POST("/cronjob/create", cronjob.CreateCronJob)
 	//helm应用商店
 	apiV1.
 		GET("/helmstore/releases", HelmStore.ListReleases).
