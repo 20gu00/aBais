@@ -96,7 +96,7 @@ const (
 	// node
 	CodeGetNodeErr
 	CodeGetNodeDetailErr
-	CodeCreateNodeErr
+	//CodeCreateNodeErr
 
 	// ns
 	CodeGetNsErr
@@ -110,7 +110,14 @@ const (
 	// all resource
 	CodeGetAllResourceNumErr
 
-	//helm
+	// job
+	CodeCreateJobErr
+	CodeDeleteJobErr
+	CodeUpdateJobErr
+	CodeGetJobErr
+	CodeGetJobDetailErr
+
+	// helm
 	CodeListReleaseErr
 	CodeDetailReleaseErr
 	CodeInstallReleaseErr
@@ -225,6 +232,13 @@ var codeMsgMap = map[respCode]string{
 	// event
 	CodeListEventErr:         "获取event列表失败",
 	CodeGetAllResourceNumErr: "获取所有资源的数量失败",
+
+	// job
+	CodeCreateJobErr:    "创建job错误",
+	CodeDeleteJobErr:    "删除job错误",
+	CodeUpdateJobErr:    "更新job错误",
+	CodeGetJobErr:       "获取job错误",
+	CodeGetJobDetailErr: "获取job详情错误",
 
 	// release
 	CodeListReleaseErr:      "获取release列表失败",

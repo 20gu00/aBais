@@ -10,6 +10,7 @@ import (
 	"github.com/20gu00/aBais/controller/event"
 	HelmStore "github.com/20gu00/aBais/controller/helm-store"
 	"github.com/20gu00/aBais/controller/ingress"
+	"github.com/20gu00/aBais/controller/job"
 	"github.com/20gu00/aBais/controller/namespace"
 	"github.com/20gu00/aBais/controller/node"
 	"github.com/20gu00/aBais/controller/pod"
@@ -126,7 +127,15 @@ func SetupRouter(r *gin.Engine) {
 		GET("/allresource", allResources.GetAllResourceNum).
 
 		// cluster
-		GET("/clusters", cluster.GetClusters)
+		GET("/clusters", cluster.GetClusters).
+
+		// job
+		// cronjob
+		GET("/jobs", job.GetJobs).
+		GET("/job/detail", job.GetJobDetail).
+		DELETE("/job/delete", job.DeleteJob).
+		PUT("/job/update", job.UpdateJob).
+		POST("/job/create", job.CreateJob)
 
 	//helm应用商店
 	apiV1.
@@ -140,7 +149,4 @@ func SetupRouter(r *gin.Engine) {
 		DELETE("/helmstore/chart/delete", HelmStore.DeleteChart).
 		POST("/helmstore/chartfile/upload", HelmStore.UploadChartFile).
 		DELETE("/helmstore/chartfile/delete", HelmStore.DeleteChartFile)
-	// job
-	// cronjob
-
 }

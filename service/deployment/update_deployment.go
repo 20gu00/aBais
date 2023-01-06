@@ -15,16 +15,17 @@ import (
 func (d *deployment) UpdateDeployment(client *kubernetes.Clientset, namespace, content string) (err error) {
 	var deploy = &appsv1.Deployment{}
 
+	// 反序列化yaml
 	err = json.Unmarshal([]byte(content), deploy)
 	if err != nil {
-		zap.L().Error("C-UpdateDeployment 反序列化失败", zap.Error(err))
+		zap.L().Error("S-UpdateDeployment 反序列化失败", zap.Error(err))
 		return errors.New("反序列化失败, " + err.Error())
 	}
 
 	_, err = client.AppsV1().Deployments(namespace).Update(context.TODO(), deploy, metav1.UpdateOptions{})
 	if err != nil {
-		zap.L().Error("C-UpdateDeployment 更新Deployment失败", zap.Error(err))
-		return errors.New("更新Deployment失败, " + err.Error())
+		zap.L().Error("S-UpdateDeployment 更新Deployment失败", zap.Error(err))
+		return errors.New("更新Deployment失败" + err.Error())
 	}
 	return nil
 }

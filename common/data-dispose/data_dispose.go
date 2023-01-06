@@ -6,6 +6,7 @@ import (
 	"time"
 
 	appsv1 "k8s.io/api/apps/v1"
+	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	nwv1 "k8s.io/api/networking/v1"
 )
@@ -230,4 +231,24 @@ func (p PvCell) GetCreation() time.Time {
 
 func (p PvCell) GetName() string {
 	return p.Name
+}
+
+type JobCell batchv1.Job
+
+func (d JobCell) GetCreation() time.Time {
+	return d.CreationTimestamp.Time
+}
+
+func (d JobCell) GetName() string {
+	return d.Name
+}
+
+type CronJobCell batchv1.CronJob
+
+func (d CronJobCell) GetCreation() time.Time {
+	return d.CreationTimestamp.Time
+}
+
+func (d CronJobCell) GetName() string {
+	return d.Name
 }
