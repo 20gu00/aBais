@@ -17,6 +17,7 @@ import (
 	"github.com/20gu00/aBais/controller/pod"
 	"github.com/20gu00/aBais/controller/pv"
 	"github.com/20gu00/aBais/controller/pvc"
+	"github.com/20gu00/aBais/controller/role"
 	"github.com/20gu00/aBais/controller/secret"
 	"github.com/20gu00/aBais/controller/service"
 	"github.com/20gu00/aBais/controller/statefulset"
@@ -142,7 +143,15 @@ func SetupRouter(r *gin.Engine) {
 		GET("/cronjob/detail", cronjob.GetCronJobDetail).
 		DELETE("/cronjob/delete", cronjob.DeleteCronJob).
 		PUT("/cronjob/update", cronjob.UpdateCronJob).
-		POST("/cronjob/create", cronjob.CreateCronJob)
+		POST("/cronjob/create", cronjob.CreateCronJob).
+
+		// role
+		GET("/roles", role.GetRoles).
+		GET("/role/detail", role.GetRoleDetail).
+		DELETE("/role/delete", role.DeleteRole).
+		PUT("/role/update", role.UpdateRole).
+		POST("/role/create", role.CreateRole)
+
 	//helm应用商店
 	apiV1.
 		GET("/helmstore/releases", HelmStore.ListReleases).

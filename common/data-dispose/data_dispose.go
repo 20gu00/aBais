@@ -2,6 +2,7 @@ package dataDispose
 
 import (
 	batchv1 "k8s.io/api/batch/v1"
+	rbacv1 "k8s.io/api/rbac/v1"
 	"sort"
 	"strings"
 	"time"
@@ -252,4 +253,54 @@ func (d CronJobCell) GetCreation() time.Time {
 
 func (d CronJobCell) GetName() string {
 	return d.Name
+}
+
+type RoleCell rbacv1.Role
+
+func (s RoleCell) GetCreation() time.Time {
+	return s.CreationTimestamp.Time
+}
+
+func (s RoleCell) GetName() string {
+	return s.Name
+}
+
+type RoleBindingCell rbacv1.RoleBinding
+
+func (s RoleBindingCell) GetCreation() time.Time {
+	return s.CreationTimestamp.Time
+}
+
+func (s RoleBindingCell) GetName() string {
+	return s.Name
+}
+
+type ClusterRoleCell rbacv1.ClusterRole
+
+func (s ClusterRoleCell) GetCreation() time.Time {
+	return s.CreationTimestamp.Time
+}
+
+func (s ClusterRoleCell) GetName() string {
+	return s.Name
+}
+
+type ClusterRolebindingCell rbacv1.ClusterRoleBinding
+
+func (s ClusterRolebindingCell) GetCreation() time.Time {
+	return s.CreationTimestamp.Time
+}
+
+func (s ClusterRolebindingCell) GetName() string {
+	return s.Name
+}
+
+type ServiceAccountCell corev1.ServiceAccount
+
+func (s ServiceAccountCell) GetCreation() time.Time {
+	return s.CreationTimestamp.Time
+}
+
+func (s ServiceAccountCell) GetName() string {
+	return s.Name
 }

@@ -117,6 +117,41 @@ const (
 	CodeGetJobErr
 	CodeGetJobDetailErr
 
+	// role
+	CodeCreateRoleErr
+	CodeDeleteRoleErr
+	CodeUpdateRoleErr
+	CodeGetRoleErr
+	CodeGetRoleDetailErr
+
+	// ClusterRole
+	CodeCreateClusterRoleErr
+	CodeDeleteClusterRoleErr
+	CodeUpdateClusterRoleErr
+	CodeGetClusterRoleErr
+	CodeGetClusterRoleDetailErr
+
+	// RoleBinding
+	CodeCreateRoleBindingErr
+	CodeDeleteRoleBindingErr
+	CodeUpdateRoleBindingErr
+	CodeGetRoleBindingErr
+	CodeGetRoleBindingDetailErr
+
+	// clusterRolebinding
+	CodeCreateclusterRolebindingErr
+	CodeDeleteclusterRolebindingErr
+	CodeUpdateclusterRolebindingErr
+	CodeGetclusterRolebindingErr
+	CodeGetclusterRolebindingDetailErr
+
+	// serviceAccount
+	CodeCreateserviceAccountErr
+	CodeDeleteserviceAccountErr
+	CodeUpdateserviceAccountErr
+	CodeGetserviceAccountErr
+	CodeGetserviceAccountDetailErr
+
 	// cronJob
 	CodeCreateCronJobErr
 	CodeDeleteCronJobErr
@@ -253,6 +288,41 @@ var codeMsgMap = map[respCode]string{
 	CodeUpdateCronJobErr:    "更新cronjob失败",
 	CodeGetCronJobErr:       "获取cronjob列表失败",
 	CodeGetCronJobDetailErr: "获取cronjob详情失败",
+
+	// role
+	CodeCreateRoleErr:    "创建role失败",
+	CodeDeleteRoleErr:    "删除role失败",
+	CodeUpdateRoleErr:    "更新role失败",
+	CodeGetRoleErr:       "获取role列表失败",
+	CodeGetRoleDetailErr: "获取role详情失败",
+
+	// clusterRole
+	CodeCreateClusterRoleErr:    "创建clusterRole失败",
+	CodeDeleteClusterRoleErr:    "删除clusterRole失败",
+	CodeUpdateClusterRoleErr:    "更新clusterRole失败",
+	CodeGetClusterRoleErr:       "获取clusterRole列表失败",
+	CodeGetClusterRoleDetailErr: "获取clusterRole详情失败",
+
+	// roleBinding
+	CodeCreateRoleBindingErr:    "创建roleBinding失败",
+	CodeDeleteRoleBindingErr:    "删除roleBinding失败",
+	CodeUpdateRoleBindingErr:    "更新roleBinding失败",
+	CodeGetRoleBindingErr:       "获取roleBinding列表失败",
+	CodeGetRoleBindingDetailErr: "获取roleBinding详情失败",
+
+	// clusterRolebinding
+	CodeCreateclusterRolebindingErr:    "创建clusterRolebinding失败",
+	CodeDeleteclusterRolebindingErr:    "删除clusterRolebinding失败",
+	CodeUpdateclusterRolebindingErr:    "更新clusterRolebinding失败",
+	CodeGetclusterRolebindingErr:       "获取clusterRolebinding列表失败",
+	CodeGetclusterRolebindingDetailErr: "获取clusterRolebinding详情失败",
+
+	// serviceAccount
+	CodeCreateserviceAccountErr:    "创建serviceAccount失败",
+	CodeDeleteserviceAccountErr:    "删除serviceAccount失败",
+	CodeUpdateserviceAccountErr:    "更新serviceAccount失败",
+	CodeGetserviceAccountErr:       "获取serviceAccount列表失败",
+	CodeGetserviceAccountDetailErr: "获取serviceAccount详情失败",
 
 	// release
 	CodeListReleaseErr:      "获取release列表失败",
