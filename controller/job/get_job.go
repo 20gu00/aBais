@@ -1,6 +1,7 @@
 package job
 
 import (
+	"fmt"
 	k8sClient "github.com/20gu00/aBais/common/k8s-clientset"
 	"github.com/20gu00/aBais/common/response"
 	param "github.com/20gu00/aBais/model/param/job"
@@ -34,6 +35,7 @@ func GetJobs(ctx *gin.Context) {
 		return
 	}
 
+	fmt.Println(data)
 	// 3.resp
 	response.RespOK(ctx, "获取job列表成功", data)
 }
