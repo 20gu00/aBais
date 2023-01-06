@@ -10,7 +10,8 @@ grace_time: 10  #优雅关闭的时间,秒
 
 # kubeconfig路径(多集群)
 # Kubeconfigs = `{"Cluster-1":"/root/.kube/config","Cluster-2":"/Users/adoo/.kube/config"}`
-KubeConfigs: '{"Cluster-1":"/root/.kube/config"}'
+#yaml文件这么写不规范,但不影响,要满足{ , }格式,也可以在后端代码中修改
+KubeConfigs: '{"Cluster-1":"/root/.kube/config","Cluster-2":"/root/.kube/config"}'
 
 # 提供app默认账号密码
 AdminUser: "admin"
