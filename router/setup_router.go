@@ -23,6 +23,7 @@ import (
 	roleBinding "github.com/20gu00/aBais/controller/role-binding"
 	"github.com/20gu00/aBais/controller/secret"
 	"github.com/20gu00/aBais/controller/service"
+	serviceAccount "github.com/20gu00/aBais/controller/service_account"
 	"github.com/20gu00/aBais/controller/statefulset"
 
 	"github.com/gin-gonic/gin"
@@ -174,7 +175,14 @@ func SetupRouter(r *gin.Engine) {
 		GET("/clusterrolebinding/detail", clusterRoleBinding.GetClusterRoleBindingDetail).
 		DELETE("/clusterrolebinding/delete", clusterRoleBinding.DeleteClusterRoleBinding).
 		PUT("/clusterrolebinding/update", clusterRoleBinding.UpdateClusterRoleBinding).
-		POST("/clusterrolebinding/create", clusterRoleBinding.CreateClusterRoleBinding)
+		POST("/clusterrolebinding/create", clusterRoleBinding.CreateClusterRoleBinding).
+
+		// sa
+		GET("/sas", serviceAccount.GetSas).
+		GET("/sa/detail", serviceAccount.GetSaDetail).
+		DELETE("/sa/delete", serviceAccount.DeleteSa).
+		PUT("/sa/update", serviceAccount.UpdateSa).
+		POST("/sa/create", serviceAccount.CreateSa)
 
 	//helm应用商店
 	apiV1.
