@@ -5,6 +5,7 @@ import (
 	allResources "github.com/20gu00/aBais/controller/all-resources"
 	"github.com/20gu00/aBais/controller/cluster"
 	clusterRole "github.com/20gu00/aBais/controller/cluster-role"
+	clusterRoleBinding "github.com/20gu00/aBais/controller/cluster-role-binding"
 	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/cronjob"
 	"github.com/20gu00/aBais/controller/daemonset"
@@ -166,7 +167,14 @@ func SetupRouter(r *gin.Engine) {
 		GET("/rolebinding/detail", roleBinding.GetRoleBindingDetail).
 		DELETE("/rolebinding/delete", roleBinding.DeleteRoleBinding).
 		PUT("/rolebinding/update", roleBinding.UpdateRoleBinding).
-		POST("/rolebinding/create", roleBinding.CreateRoleBinding)
+		POST("/rolebinding/create", roleBinding.CreateRoleBinding).
+
+		// cluster rolebinding
+		GET("/clusterrolebindings", clusterRoleBinding.GetClusterRoleBindings).
+		GET("/clusterrolebinding/detail", clusterRoleBinding.GetClusterRoleBindingDetail).
+		DELETE("/clusterrolebinding/delete", clusterRoleBinding.DeleteClusterRoleBinding).
+		PUT("/clusterrolebinding/update", clusterRoleBinding.UpdateClusterRoleBinding).
+		POST("/clusterrolebinding/create", clusterRoleBinding.CreateClusterRoleBinding)
 
 	//helm应用商店
 	apiV1.

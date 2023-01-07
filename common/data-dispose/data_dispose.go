@@ -285,13 +285,13 @@ func (s ClusterRoleCell) GetName() string {
 	return s.Name
 }
 
-type ClusterRolebindingCell rbacv1.ClusterRoleBinding
+type ClusterRoleBindingCell rbacv1.ClusterRoleBinding
 
-func (s ClusterRolebindingCell) GetCreation() time.Time {
+func (s ClusterRoleBindingCell) GetCreation() time.Time {
 	return s.CreationTimestamp.Time
 }
 
-func (s ClusterRolebindingCell) GetName() string {
+func (s ClusterRoleBindingCell) GetName() string {
 	return s.Name
 }
 
