@@ -92,6 +92,7 @@ const (
 	CodeGetPvDetailErr
 	CodeDeletePvErr
 	CodeCreatePvErr
+	COdeUpdatePvErr
 
 	// node
 	CodeGetNodeErr
@@ -256,6 +257,7 @@ var codeMsgMap = map[respCode]string{
 	CodeCreatePvcErr:    "创建pvc失败",
 
 	// pv
+	CodeUpdatePvcErr:   "更新pv失败",
 	CodeGetPvErr:       "获取pv列表失败",
 	CodeGetPvDetailErr: "获取pv详情失败",
 	CodeDeletePvErr:    "删除pv失败",

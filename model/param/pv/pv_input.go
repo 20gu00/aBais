@@ -16,3 +16,9 @@ type DeletePvInput struct {
 	PvName  string `json:"pv_name"`
 	Cluster string `json:"cluster"`
 }
+
+type UpdatePvInput struct {
+	//Namespace string `json:"namespace"`
+	Content string `json:"content"`
+	Cluster string `json:"cluster"`
+}
