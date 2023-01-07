@@ -10,7 +10,7 @@ import (
 )
 
 // 删除job
-func (r *clusterRoleBinding) DeleteClusterRoleBinding(client *kubernetes.Clientset, clusterRoleBindingName, namespace string) (err error) {
+func (r *clusterRoleBinding) DeleteClusterRoleBinding(client *kubernetes.Clientset, clusterRoleBindingName string) (err error) {
 	err = client.RbacV1().ClusterRoleBindings().Delete(context.TODO(), clusterRoleBindingName, metav1.DeleteOptions{})
 	if err != nil {
 		zap.L().Error("S-DeleteClusterRoleBinding 删除cluster role binding失败", zap.Error(err))

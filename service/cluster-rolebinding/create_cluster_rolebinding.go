@@ -11,7 +11,6 @@ import (
 
 type ClusterRoleBindingCreate struct {
 	Name            string `json:"name"`
-	Namespace       string `json:"namespace"`
 	Cluster         string `json:"cluster"`
 	ClusterRoleName string `json:"clusterrole_name"`
 	SaName          string `json:"sa_name"`

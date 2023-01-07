@@ -28,7 +28,7 @@ func DeleteClusterRoleBinding(ctx *gin.Context) {
 		return
 	}
 
-	err = service.ClusterRoleBinding.DeleteClusterRoleBinding(client, params.CLusterRoleBindingName, params.Namespace)
+	err = service.ClusterRoleBinding.DeleteClusterRoleBinding(client, params.CLusterRoleBindingName)
 	if err != nil {
 		zap.L().Error("C-DeleteClusterRoleBinding 删除Cluster RoleBinding失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeDeleteclusterRolebindingErr)

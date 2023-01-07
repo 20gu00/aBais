@@ -2,7 +2,6 @@ package param
 
 type DeleteClusterRoleBindingInput struct {
 	CLusterRoleBindingName string `json:"clusterrolebinding_name"`
-	Namespace              string `json:"namespace"`
 	Cluster                string `json:"cluster"`
 }
 
