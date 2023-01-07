@@ -4,6 +4,7 @@ import (
 	"github.com/20gu00/aBais/controller/admin"
 	allResources "github.com/20gu00/aBais/controller/all-resources"
 	"github.com/20gu00/aBais/controller/cluster"
+	clusterRole "github.com/20gu00/aBais/controller/cluster-role"
 	"github.com/20gu00/aBais/controller/cm"
 	"github.com/20gu00/aBais/controller/cronjob"
 	"github.com/20gu00/aBais/controller/daemonset"
@@ -150,7 +151,14 @@ func SetupRouter(r *gin.Engine) {
 		GET("/role/detail", role.GetRoleDetail).
 		DELETE("/role/delete", role.DeleteRole).
 		PUT("/role/update", role.UpdateRole).
-		POST("/role/create", role.CreateRole)
+		POST("/role/create", role.CreateRole).
+
+		// cluster role
+		GET("/clusterroles", clusterRole.GetClusterRoles).
+		GET("/clusterrole/detail", clusterRole.GetClusterRoleDetail).
+		DELETE("/clusterrole/delete", clusterRole.DeleteClusterRole).
+		PUT("/clusterrole/update", clusterRole.UpdateClusterRole).
+		POST("/clusterrole/create", clusterRole.CreateClusterRole)
 
 	//helm应用商店
 	apiV1.

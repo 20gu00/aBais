@@ -30,7 +30,7 @@ func CreateRole(ctx *gin.Context) {
 		return
 	}
 	if err = service.Role.CreateRole(client, roleCreate); err != nil {
-		zap.L().Error("C-CreateRole 创建job失败", zap.Error(err))
+		zap.L().Error("C-CreateRole 创建role失败", zap.Error(err))
 		response.RespInternalErr(ctx, response.CodeCreateRoleErr) //  前段可以使用
 		return
 	}

@@ -21,7 +21,7 @@ type UpdateRoleInput struct {
 }
 
 type GetRoleDetailInput struct {
-	RoleName  string `form:"Role_name"`
+	RoleName  string `form:"role_name"`
 	Namespace string `form:"namespace"`
 	Cluster   string `form:"cluster"`
 }

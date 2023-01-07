@@ -15,7 +15,7 @@ import (
 func (r *role) GetRoleDetail(client *kubernetes.Clientset, roleName, namespace string) (role *rbacv1.Role, err error) {
 	role, err = client.RbacV1().Roles(namespace).Get(context.TODO(), roleName, metav1.GetOptions{})
 	if err != nil {
-		zap.L().Error("S-GetRoleDetail 获取job详情失败", zap.Error(err))
+		zap.L().Error("S-GetRoleDetail 获取role详情失败", zap.Error(err))
 		return nil, errors.New("获取role详情失败" + err.Error())
 	}
 
