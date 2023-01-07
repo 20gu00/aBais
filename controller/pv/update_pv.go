@@ -31,7 +31,7 @@ func UpdatePv(ctx *gin.Context) {
 	err = service.Pv.UpdatePv(client, params.Content)
 	if err != nil {
 		zap.L().Error("C-UpdatePv 更新pv详情失败", zap.Error(err))
-		response.RespInternalErr(ctx, response.COdeUpdatePvErr)
+		response.RespInternalErr(ctx, response.CodeUpdatePvErr)
 		return
 	}
 
