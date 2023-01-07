@@ -22,7 +22,7 @@ func (j *clusterRole) UpdateClusterRole(client *kubernetes.Clientset, content st
 	_, err = client.RbacV1().ClusterRoles().Update(context.TODO(), clusterRole, metav1.UpdateOptions{})
 	if err != nil {
 		zap.L().Error("S-UpdateClusterRole 更新cluster role失败", zap.Error(err))
-		return errors.New("ClusterRole" + err.Error())
+		return errors.New("更新cluster role失败" + err.Error())
 	}
 	return nil
 }

@@ -22,7 +22,7 @@ func (j *role) UpdateRole(client *kubernetes.Clientset, namespace, content strin
 	_, err = client.RbacV1().Roles(namespace).Update(context.TODO(), role, metav1.UpdateOptions{})
 	if err != nil {
 		zap.L().Error("S-UpdateJob 更新role失败", zap.Error(err))
-		return errors.New("Role" + err.Error())
+		return errors.New("更新role失败" + err.Error())
 	}
 	return nil
 }
