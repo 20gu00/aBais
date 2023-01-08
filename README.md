@@ -51,4 +51,6 @@ go+vue3开发，这里是后端部分，前端在aBais-view仓库下。
 
 
 **chart repo**    
+其中mysql-op是自行开发的operator，源码在我的k8s_dev仓库的mysql-single目录。  
+再制作成chart，使用helm管理。  
 ![image](https://user-images.githubusercontent.com/61965693/211200402-f9b031ac-1dab-4a9b-bee1-6a8c8fd4854a.png)  
