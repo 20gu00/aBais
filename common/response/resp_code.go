@@ -343,6 +343,8 @@ var codeMsgMap = map[respCode]string{
 
 // 基本的返回描述msg
 func (c respCode) Msg() string {
+	// 获取map某个值,key不存在那么ok是false并且msg是类型零值
+	// 获取的code不是已经定义的,那么就统一是intervalErr
 	msg, ok := codeMsgMap[c]
 	if !ok {
 		msg = codeMsgMap[CodeServerIntervalErr]

@@ -49,7 +49,7 @@ func InitLogger(cfg *config.LogConfig, mode string) (err error) {
 	// 调用的函数
 	logger = zap.New(core, zap.AddCaller()) // ide
 
-	// 全局变量使用不方便,可以替换zap的全局变量logger
+	// 全局变量使用不方便,可以替换zap的全局变量logger zap.L()
 	zap.ReplaceGlobals(logger)
 	zap.L().Info("初始化logger完成")
 
@@ -71,6 +71,7 @@ func getEncoder() zapcore.Encoder {
 
 }
 
+// zap 搭配lumberjsck来做日志切割
 func getLogWriter(filename string, maxSize, maxBackup, maxAge int, compress bool) zapcore.WriteSyncer {
 	lumberJackLogger := &lumberjack.Logger{
 		Filename:   filename,

@@ -7,20 +7,19 @@ import (
 )
 
 /*
-用于处理resp
-格式固定,便于前端编写
 {
-	"code": 0, // 程序中的错误码
+	"code": 0, // 程序中的错误码 业务错误码
 	"msg": xx,     // 提示信息
 	"data": {},    // 数据
 }
+
+或者原生的gin.H{}
 */
 
-// 或者原生的gin.H{}
 type Resp struct {
 	Code respCode    `json:"code"`
 	Msg  interface{} `json:"msg"`
-	Data interface{} `json:"data,omitempty"` // 忽略空的字段
+	Data interface{} `json:"data,omitempty"` // 忽略空的字段,可以为空
 }
 
 func RespInternalErr(c *gin.Context, code respCode) {
@@ -37,6 +36,7 @@ func RespInternalErr(c *gin.Context, code respCode) {
 }
 
 func RespErr(c *gin.Context, code respCode) {
+	// gin的context 传递的是json
 	c.JSON(http.StatusOK, &Resp{
 		Code: code,
 		Msg:  code.Msg(),

@@ -1,8 +1,9 @@
 package middleware
 
 import (
-	"github.com/20gu00/aBais/common/jwt-token"
 	"net/http"
+
+	"github.com/20gu00/aBais/common/jwt-token"
 
 	"github.com/gin-gonic/gin"
 )
