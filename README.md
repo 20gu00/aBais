@@ -1,7 +1,7 @@
 # aBais
 ## k8s管理平台
 go+vue3开发，这里是后端部分，前端在[aBais-view](https://github.com/20gu00/aBais-view)仓库下。  
-包括client-go操作k8s集群资源和operator的开发。  
+主要由client-go操作k8s集群资源,operator的开发和chart制作等等。  
 
 ## dev环境
 1.k8s集群:v1.20.10  
