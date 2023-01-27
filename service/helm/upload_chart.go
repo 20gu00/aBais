@@ -21,10 +21,12 @@ import (
 
 //http请求常见的content-type分为4种：application/json、x-www-form-urlencoded、multipart/form-data、text/plain。
 //1.x-www-form-urlencoded  浏览器原生表单 发送前编码所有字符 默认
-//2.multipart/form-data 不对文件进行编码,在使用包含文件上传空间的表单时,必须使用这个值 我们使用表单上传文件时，必须将enctype设为multipart/form-data
+//2.multipart/form-data 不对文件进行编码,在使用包含文件上传控件的表单时,必须使用这个值 我们使用表单上传文件时，必须将enctype设为multipart/form-data
 //上面两种 POST 数据方式，都是浏览器原生支持的，而且现阶段原生 form 表单也只支持这两种方式
 //3.application/json 消息主题是json字符串
 //4.text/plain 空格转换为"+",但不对特殊字符编码
+
+// multipart上传文件
 func (*helmStore) UploadChartFile(file multipart.File, header *multipart.FileHeader) error {
 	filename := header.Filename
 	t := strings.Split(filename, ".")
@@ -44,6 +46,7 @@ func (*helmStore) UploadChartFile(file multipart.File, header *multipart.FileHea
 		return errors.New("创建chart文件失败" + err.Error())
 	}
 	defer out.Close()
+	// 将上传的chart文件copy到filepath
 	_, err = io.Copy(out, file)
 	if err != nil {
 		zap.L().Error("拷贝chart文件失败", zap.Error(err))

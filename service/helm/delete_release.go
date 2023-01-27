@@ -9,6 +9,7 @@ import (
 
 //release卸载
 func (*helmStore) UninstallRelease(actionConfig *action.Configuration, release, namespace string) error {
+	//创建一个删除release的client
 	client := action.NewUninstall(actionConfig)
 	_, err := client.Run(release)
 	if err != nil {

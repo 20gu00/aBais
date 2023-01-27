@@ -17,16 +17,20 @@ func (*helmStore) InstallRelease(actionConfig *action.Configuration, release, ch
 	client.ReleaseName = release
 	client.Namespace = namespace
 
+	// .压缩包
 	splitChart := strings.Split(chart, ".")
+	// 不需要:版本
 	if splitChart[len(splitChart)-1] == "tgz" && !strings.Contains(chart, ":") {
 		chart = config.Config.UploadPath + "/" + chart
 	}
 
+	// 加载chart
 	chartRequested, err := loader.Load(chart)
 	if err != nil {
 		zap.L().Error("加载chart文件失败" + err.Error())
 		return errors.New("加载chart文件失败" + err.Error())
 	}
+	// 默认vals(chart的values.yaml)
 	vals := map[string]interface{}{}
 	_, err = client.Run(chartRequested, vals)
 	if err != nil {

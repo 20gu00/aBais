@@ -13,6 +13,7 @@ var HelmStore helmStore
 
 type helmStore struct{}
 
+// release要素
 type releaseElement struct {
 	Name         string `json:"name"`
 	Namespace    string `json:"namespace"`
@@ -58,7 +59,7 @@ func (*helmStore) ListReleases(actionConfig *action.Configuration, filterName st
 	}, nil
 }
 
-//release内容过滤
+// release内容过滤
 func constructReleaseElement(r *release.Release, showStatus bool) *releaseElement {
 	element := &releaseElement{
 		Name:         r.Name,

@@ -10,6 +10,7 @@ import (
 
 // chart文件上传
 func UploadChartFile(ctx *gin.Context) {
+	// 获取请求中的文件(文件,文件头)
 	file, header, err := ctx.Request.FormFile("chart")
 	if err != nil {
 		zap.L().Error("C-UploadChartFile 获取上传信息失败", zap.Error(err))
