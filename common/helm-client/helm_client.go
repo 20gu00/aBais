@@ -14,6 +14,8 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 )
 
+// 使用helm提供的sdk
+
 var HelmConfig helmConfig
 
 type helmConfig struct {
@@ -21,7 +23,6 @@ type helmConfig struct {
 	ActionConfigMap map[string]*action.Configuration
 }
 
-//no init
 func (h *helmConfig) Init() {
 	mp := make(map[string]*action.Configuration, 0)
 	for cluster, kubeconfig := range k8sClient.K8s.KubeConfMap {
@@ -32,15 +33,17 @@ func (h *helmConfig) Init() {
 		}
 		for _, namespace := range namespaces.Items {
 			actionConfig := new(action.Configuration)
+			// 通用cli选项配置
 			cf := genericclioptions.ConfigFlags{
 				KubeConfig: &kubeconfig,
 				Namespace:  &namespace.Name,
 			}
-			//namespace为空字符串那么就是列出全部namespace
+			//namespace为空字符串那么就是namespace
 			if err := actionConfig.Init(&cf, namespace.Name, os.Getenv("HELM_DRIVER"), log.Printf); err != nil {
 				zap.L().Error("helm Config初始化失败", zap.Error(err))
-				panic("helm Config初始化失败, " + err.Error())
+				panic("helm Config初始化失败" + err.Error())
 			}
+			// 操作某个集群某个ns的helm客户端配置
 			str := fmt.Sprintf("%s-%s", namespace.Name, cluster)
 			mp[str] = actionConfig
 			zap.L().Info(fmt.Sprintf("集群:%s,命名空间:%s,初始化action Config成功 ", cluster, namespace.Name))
