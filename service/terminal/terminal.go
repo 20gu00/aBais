@@ -47,7 +47,7 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	// new一个TerminalSession类型的pty实例 tty
+	// 实例化一个终端new一个TerminalSession类型的pty实例 tty
 	// websocket的输入和输出
 	pty, err := NewTerminalSession(w, r, nil)
 	if err != nil {
@@ -72,6 +72,7 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 	// exec是post请求
 	// GVK GVR 远程执行的命令传递到pod container的终端上运行
 
+	// 组装一个与api-server交互的请求
 	req := client.CoreV1().RESTClient().Post().
 		Resource("pods").
 		Name(podName).
@@ -90,7 +91,7 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 
 	// remotecommand提供方法与集群建立长连接,与pod中的容器建立个长链接进行交互,并设置stdin stdout 提供基于 SPDY 协议的 Executor interface，进行和 pod 终端的流的传输
 	// 主要实现了http 转 SPDY 添加X-Stream-Protocol-Version相关header 并发送请求
-	// kubeconfig 请求方法 请求的url
+	// kubeconfig 请求方法 请求的url(转换成url)
 	// exec是POST请求
 	// 发送这个请求给apiserver,类似kubectl exec和apiserver交互,remotecommand包创建一个executor和apiserver建立长连接
 	executor, err := remotecommand.NewSPDYExecutor(conf, "POST", req.URL())
@@ -125,7 +126,8 @@ func (t *terminal) WsHandler(w http.ResponseWriter, r *http.Request) {
 
 const END_OF_TRANSMISSION = "\u0004"
 
-// TerminalMessage定义了终端和容器shell交互内容的格式
+// 终端的信息(操作类型,数据,宽,高)
+// TerminalMessage定义了终端和容器shell交互内容的格式(终端格式)
 // Operation是操作类型
 // Data是具体数据内容
 // Rows和Cols可以理解为终端的行数和列数，也就是宽、高
@@ -136,17 +138,20 @@ type TerminalMessage struct {
 	Cols      uint16 `json:"cols"`
 }
 
-// 初始化一个websocket.Upgrader类型的对象，用于http协议升级为websocket协议
+// 初始化一个websocket.Upgrader类型的对象，用于http协议升级为websocket协议(http->websocket)
 // 一等公民
 var upgrader = func() websocket.Upgrader {
 	upgrader := websocket.Upgrader{}
+	// 握手建立连接的超时时间
 	upgrader.HandshakeTimeout = time.Second * 2
+	// 检查源头
 	upgrader.CheckOrigin = func(r *http.Request) bool {
 		return true
 	}
 	return upgrader
 }()
 
+// 终端的会话定义(websocket连接,大小尺寸,时候关闭)
 // 定义TerminalSession结构体，实现PtyHandler接口
 // wsConn是websocket连接
 // sizeChan用来定义终端输入和输出的宽和高
@@ -178,6 +183,7 @@ func (t *TerminalSession) Done() {
 }
 
 // 获取web端是否resize，以及是否退出终端
+// 返回此时终端的尺寸
 func (t *TerminalSession) Next() *remotecommand.TerminalSize {
 	select {
 	case size := <-t.sizeChan:
@@ -189,6 +195,7 @@ func (t *TerminalSession) Next() *remotecommand.TerminalSize {
 
 // 用于读取web端的输入，接收web端输入的指令内容(message)
 func (t *TerminalSession) Read(p []byte) (int, error) {
+	// websocket读取msg
 	_, message, err := t.wsConn.ReadMessage()
 
 	if err != nil {
@@ -196,11 +203,13 @@ func (t *TerminalSession) Read(p []byte) (int, error) {
 		return 0, err
 	}
 	var msg TerminalMessage
+	// 将数据反序列化进结构体
 	if err := json.Unmarshal([]byte(message), &msg); err != nil {
 		zap.L().Info("read parse message err", zap.Error(err))
 		return 0, err
 	}
 
+	// 终端信息中的操作类型
 	switch msg.Operation {
 	case "stdin":
 		return copy(p, msg.Data), nil
@@ -219,6 +228,7 @@ func (t *TerminalSession) Read(p []byte) (int, error) {
 
 // 用于向web端输出，接收web端的指令后，将结果返回出去
 func (t *TerminalSession) Write(p []byte) (int, error) {
+	// 将结构体信息做序列化(前提是有json标签)
 	msg, err := json.Marshal(TerminalMessage{
 		Operation: "stdout",
 		Data:      string(p),

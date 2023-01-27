@@ -12,6 +12,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// 直接暴露(也可以做成interface)
 var Event event
 
 type event struct{}

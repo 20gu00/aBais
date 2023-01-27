@@ -33,9 +33,10 @@ func main() {
 	// 处理event,监听event并写入数据库
 	common.EventWatch()
 
-	// websocket,创建个http mux
+	// 处理terminal
+	// mux
 	wsHandler := http.NewServeMux()
-	// handler 注册路由和创建http server
+	// handler 注册路由和创建ws http server
 	wsHandler.HandleFunc("/ws", service.Terminal.WsHandler)
 	ws := &http.Server{
 		Addr:    config.Config.WSAddr,

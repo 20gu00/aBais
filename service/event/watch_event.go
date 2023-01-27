@@ -16,7 +16,7 @@ import (
 
 //监听event
 func (*event) WatchEventTask(cluster string) {
-	// 工厂模式获取informer
+	// 不通过client-go的watch而是informer机制去watchk8s集群资源,工厂模式获取informer(event频繁)
 	informerFactory := informers.NewSharedInformerFactory(k8sClient.K8s.ClientMap[cluster], time.Minute)
 	// 要处理(reflector的list watch)的资源对象类型
 	informer := informerFactory.Core().V1().Events()
@@ -48,6 +48,7 @@ func (*event) WatchEventTask(cluster string) {
 
 // 将事件存入数据库
 func onAdd(obj interface{}, cluster string) {
+	// 断言event(involve涉及)
 	event := obj.(*coreV1.Event)
 	_, has, err := dao.Event.HasEvent(event.InvolvedObject.Name,
 		event.InvolvedObject.Kind,
@@ -56,6 +57,7 @@ func onAdd(obj interface{}, cluster string) {
 		event.CreationTimestamp.Time,
 		cluster,
 	)
+
 	if err != nil {
 		return
 	}

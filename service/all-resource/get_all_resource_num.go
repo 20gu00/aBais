@@ -18,6 +18,7 @@ func (a *allRes) GetAllResourceNum(client *kubernetes.Clientset) (map[string]int
 	wg.Add(14)
 
 	// [] map make
+	// err汇总
 	errs := make([]error, 0)
 	data := make(map[string]int, 0)
 
@@ -162,5 +163,6 @@ func (a *allRes) GetAllResourceNum(client *kubernetes.Clientset) (map[string]int
 	}()
 
 	wg.Wait()
-	return data, nil
+	// return data, nil
+	return data, errs
 }
