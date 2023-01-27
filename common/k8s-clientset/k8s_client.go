@@ -18,7 +18,7 @@ import (
 var K8s k8s
 
 type k8s struct {
-	// 多个客户端,操作集群的资源对象
+	// 多个客户端
 	ClientMap map[string]*kubernetes.Clientset
 	// 集群配置文件
 	KubeConfMap map[string]string // 或者使用slice map查询快
@@ -32,7 +32,7 @@ func (k *k8s) InitK8s() {
 
 	k.ClientMap = map[string]*kubernetes.Clientset{}
 
-	// 将集群的配置文件路径信息反序列化到kubeMap string->map
+	// 将集群的配置文件路径信息反序列化到kubeMap string->map(json反序列化,将信息解码写入到比如结构体中)
 	// map[Cluster-1:/root/.kube/config Cluster-2:/root/.kube/config]
 	if err := json.Unmarshal([]byte(config.Config.KubeConfigs), &k.KubeConfMap); err != nil {
 		panic(fmt.Sprintf("获取kubeConfig配置文件路径信息,Kubeconfigs反序列化失败 %v\n", err))
@@ -54,6 +54,7 @@ func (k *k8s) InitK8s() {
 			panic(fmt.Sprintf("集群%s: 创建K8s Client失败 %v\n", key, err))
 		}
 
+		// key是cluster_name
 		k.ClientMap[key] = clientSet
 		zap.L().Info(fmt.Sprintf("集群%s: 创建K8s Client成功 ", key))
 	}

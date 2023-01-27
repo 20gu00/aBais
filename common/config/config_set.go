@@ -83,6 +83,7 @@ func ConfigRead(configFile string) error {
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("配置文件已经修改")
+		// viper解码数据进结构体
 		if err := viper.Unmarshal(Config); err != nil {
 			fmt.Println("配置文件已经修改,将配置写入结构体操作失败", err)
 		}
