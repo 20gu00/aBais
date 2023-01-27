@@ -14,7 +14,7 @@ import (
 	"k8s.io/cli-runtime/pkg/genericclioptions"
 )
 
-// 使用helm提供的sdk
+// 使用helm v3提供的sdk
 
 var HelmConfig helmConfig
 
