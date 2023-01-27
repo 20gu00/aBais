@@ -40,7 +40,7 @@ func JWTAuth() gin.HandlerFunc {
 					c.Abort()
 					return
 				}
-				//  其他解析错误
+				//  解析token 其他错误
 				c.JSON(http.StatusBadRequest, gin.H{
 					"msg":  err.Error(),
 					"data": nil,
@@ -48,7 +48,7 @@ func JWTAuth() gin.HandlerFunc {
 				c.Abort()
 				return
 			}
-			// 继续交由下一个路由处理,并将解析出的信息传递下去
+			// 交由下一个路由处理,将解析出的信息传递下去
 			c.Set("claims", claims)
 
 			c.Next()

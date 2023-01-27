@@ -9,6 +9,7 @@ import (
 
 var Config = new(AppConfig)
 
+// viper管理配置文件,将配置写入struct
 type AppConfig struct {
 	Addr          string `mapstructure:"Addr"`
 	WSAddr        string `mapstructure:"WsAddr"`
@@ -55,12 +56,15 @@ func ConfigRead(configFile string) error {
 	if configFile != "" {
 		viper.SetConfigFile(configFile)
 	} else {
+		// 默认的配置文件
 		viper.SetConfigName("config")
-		viper.SetConfigType("yaml") // 针对运城配置存储使用
+		viper.SetConfigType("yaml") // 针对远程配置存储使用
 		viper.AddConfigPath("./conf")
 	}
 
+	// 读入配置文件
 	if err := viper.ReadInConfig(); err != nil {
+		// 无ok方式断言失败会panic
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			fmt.Println("未找到配置文件", err)
 		} else {
@@ -69,13 +73,13 @@ func ConfigRead(configFile string) error {
 		}
 	}
 
-	// 讲配置写入Config
+	// 将配置写入Config struct
 	if err := viper.Unmarshal(Config); err != nil {
 		fmt.Println("将配置信息添加进结构体操作失败", err)
 		return err
 	}
 
-	// 配置及文件热加载
+	// 配置及文件热加载(监控文件变化和触发的函数)
 	viper.WatchConfig()
 	viper.OnConfigChange(func(e fsnotify.Event) {
 		fmt.Println("配置文件已经修改")
