@@ -2,6 +2,7 @@
 ## k8s管理平台
 go+vue3开发，这里是后端部分，前端在[aBais-view](https://github.com/20gu00/aBais-view)仓库下。  
 主要由client-go操作k8s集群资源,operator的开发和chart制作等等。  
+web框架选用gin,脚手架是我开发的[go_quick](https://github.com/20gu00/go_quick)脚手架
 
 ## dev环境
 1.k8s集群:v1.20.10  
@@ -9,15 +10,21 @@ go+vue3开发，这里是后端部分，前端在[aBais-view](https://github.com
 3.minikube:v1.28.0  
 4.node:v17.0.0  
 5.npm 8.1.0  
-6.vue-cli:4.5.12  
+6.vue-cli:4.5.12 
+7.go version go1.18.5 linux/amd64
 
 ## 简单介绍  
+
+### 简要概括
+1.各种资源的操作:用户,多集群管理, pod, deployment, statefulset, daemonset, service, ingress, job, cronjob, event, configmap, secret,pv, pvc, role, rolebinding, clusterrole, clusterrolebinding, namespace, node, serviceaccount  
+2.helm管理应用  
+3.operator开发和chart制作  
 
 **多集群管理**  
 ![image](https://user-images.githubusercontent.com/61965693/211200518-0e7fd3bf-e11c-4883-8616-8a21fcbef497.png)  
 
 
-**事件**   
+**event**   
 ![image](https://user-images.githubusercontent.com/61965693/211201040-2cb97efc-ac59-4b21-9f67-e7773e236e2f.png)  
 
 
@@ -45,7 +52,7 @@ go+vue3开发，这里是后端部分，前端在[aBais-view](https://github.com
 ![image](https://user-images.githubusercontent.com/61965693/211200918-5e8eaefe-785c-4531-8310-9a031eb7f9f1.png)  
 
 
-**服务**  
+**service**  
 ![image](https://user-images.githubusercontent.com/61965693/211200933-bd4334dc-a6fa-4caf-a7cb-2da3d5953e4a.png)  
 
 
@@ -59,6 +66,6 @@ go+vue3开发，这里是后端部分，前端在[aBais-view](https://github.com
 
 
 **chart repo**    
-其中mysql-op是自行开发的operator，源码在我的k8s_dev仓库的mysql-single目录。  
-再制作成chart，使用helm管理。  
+其中mysql-op是自行开发的operator，源码在我的k8s_dev仓库的[single](https://github.com/20gu00/k8s_dev/tree/master/mysql-operator/single)目录下。  
+再制作成chart，使用helm管理, chart在我的k8s_dev仓库的[tool](https://github.com/20gu00/k8s_dev/tree/master/mysql-operator/single/tool)目录下。  
 ![image](https://user-images.githubusercontent.com/61965693/211200402-f9b031ac-1dab-4a9b-bee1-6a8c8fd4854a.png)  
