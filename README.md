@@ -16,8 +16,8 @@ web框架选用gin,脚手架是我开发的[go_quick](https://github.com/20gu00/
 ## 简单介绍  
 
 ### 简要概括
-1.各种资源的操作:用户,多集群管理, pod, deployment, statefulset, daemonset, service, ingress, job, cronjob, event, configmap, secret,pv, pvc, role, rolebinding, clusterrole, clusterrolebinding, namespace, node, serviceaccount  
-2.helm管理应用  
+1.各种资源的操作:用户,多集群管理, 容器终端交互, 容器日志, pod, deployment, statefulset, daemonset, service, ingress, job, cronjob, event, configmap, secret,pv, pvc, role, rolebinding, clusterrole, clusterrolebinding, namespace, node, serviceaccount  
+2.helm创建release  
 3.operator开发和chart制作  
 
 **多集群管理**  
