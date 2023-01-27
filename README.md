@@ -3,6 +3,14 @@
 go+vue3开发，这里是后端部分，前端在aBais-view仓库下。  
 包括client-go操作k8s集群资源和operator的开发。  
 
+## dev环境
+1.k8s集群:v1.20.10  
+2.docker-ce:20.10.10  kubectl:1.20.10  
+3.minikube:v1.28.0  
+4.node:v17.0.0  
+5.npm 8.1.0  
+6.vue-cli:4.5.12  
+
 ## 简单介绍  
 
 **多集群管理**  
